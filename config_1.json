@@ -1,0 +1,47 @@
+{
+  "config": {
+    "buttons": [
+      [
+        {
+          "action": 1,
+          "simEvent": "TOGGLE_MASTER_BATTERY",
+          "value": null
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": "TOGGLE_MASTER_ALTERNATOR",
+          "value": null
+        }
+      ]
+    ],
+    "switches": [],
+    "encoders": [
+      [
+        {
+          "action": 1,
+          "simEvent": "COM_RADIO_WHOLE_INC",
+          "value": null
+        },
+        {
+          "action": 2,
+          "simEvent": "COM_RADIO_WHOLE_DEC",
+          "value": null
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": "COM_RADIO_FRACT_INC",
+          "value": null
+        },
+        {
+          "action": 2,
+          "simEvent": "COM_RADIO_FRACT_DEC",
+          "value": null
+        }
+      ]
+    ]
+  }
+}
