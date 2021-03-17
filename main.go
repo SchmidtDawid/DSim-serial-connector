@@ -23,7 +23,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	sc.SetLoggerLevel(simconnect.LogInfo)
+	sc.SetLoggerLevel(simconnect.LogError)
 
 	var connected bool = false
 	fmt.Println("connecting to MSFS...")
@@ -38,76 +38,21 @@ func main() {
 		<-c // Wait connection confirmation
 	}
 
-	var deviceEvents []deviceEvent
-	for msg := range portChannel {
-		incomingEvents, err := collectEvents(msg)
-		if err != nil {
-		}
-		deviceEvents = append(deviceEvents, incomingEvents...)
-		for len(deviceEvents) > 0 {
-			event := deviceEvents[0]
-			deviceEvents = deviceEvents[1:]
-			executeEvents(sc, event, myDevices)
-		}
+	//go goEvents(sc, myDevices, portChannel)
+
+	//go (func(){
+	//	for {
+	// 	Example_getSimVar()
+	//	}
+	//})()
+
+	go connectToSimVars(sc)
+
+	time.Sleep(3 * time.Second)
+	event := sc.NewSimEvent(simconnect.KeyAutopilotOff)
+	event.Run()
+
+	for {
+		time.Sleep(time.Second * 1000)
 	}
-
-	//cSimVar, err := sc.ConnectToSimVar(
-	// sim.SimVarPlaneAltitude(),
-	// sim.SimVarPlaneLatitude(sim.UnitDegrees), // You can force the units
-	// sim.SimVarPlaneLongitude(),
-	// sim.SimVarIndicatedAltitude(),
-	// sim.SimVarGeneralEngRpm(1),
-	// sim.SimVarAutopilotMaster(),
-	//)
-	//if err != nil {
-	// panic(err)
-	//}
-	//cSimStatus := sc.ConnectSysEventSim()
-	////wait sim start
-	//for {
-	// if <-cSimStatus {
-	//   break
-	// }
-	//}
-	//crashed := sc.ConnectSysEventCrashed()
-	//for {
-	// select {
-	// case result := <-cSimVar:
-	//   for _, simVar := range result {
-	//     var f float64
-	//     var err error
-	//     if strings.Contains(string(simVar.Unit), "String") {
-	//       log.Printf("%s : %#v\n", simVar.Name, simVar.GetString())
-	//     } else if simVar.Unit == "SIMCONNECT_DATA_LATLONALT" {
-	//       data, _ := simVar.GetDataLatLonAlt()
-	//       log.Printf("%s : %#v\n", simVar.Name, data)
-	//     } else if simVar.Unit == "SIMCONNECT_DATA_XYZ" {
-	//       data, _ := simVar.GetDataXYZ()
-	//       log.Printf("%s : %#v\n", simVar.Name, data)
-	//     } else if simVar.Unit == "SIMCONNECT_DATA_WAYPOINT" {
-	//       data, _ := simVar.GetDataWaypoint()
-	//       log.Printf("%s : %#v\n", simVar.Name, data)
-	//     } else {
-	//       f, err = simVar.GetFloat64()
-	//       log.Println(simVar.Name, fmt.Sprintf("%f", f))
-	//     }
-	//     if err != nil {
-	//       log.Println("return error :", err)
-	//     }
-	//   }
-	//
-	// case <-crashed:
-	//   log.Println("Your are crashed !!")
-	//   <-sc.Close() // Wait close confirmation
-	//   return       // This example close after crash in the sim
-	// }
-	//
-	// fmt.Println(<-portChannel)
-	//
-	//}
 }
-
-//func upd(devices) {
-//  myDevices[0].updateConfiguration()
-//  time.Sleep(time.Second * 2)
-//}

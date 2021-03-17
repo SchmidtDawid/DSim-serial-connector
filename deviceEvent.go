@@ -72,75 +72,50 @@ func executeEvents(sc *simconnect.EasySimConnect, event deviceEvent, devices []*
 	if event.eventType != 1 {
 		return
 	}
+	fmt.Println(sc.IsAlive())
 
 	for _, device := range devices {
 		if device.id == event.device {
 			if event.componentType == 1 {
 				if len(device.configuration.Elements.Buttons) >= event.componentNumber {
 					ev := device.configuration.Elements.Buttons[event.componentNumber-1][event.action-1]
+					fmt.Println("Button", event.componentNumber, event.action, ev.SimEvent)
 					event := sc.NewSimEvent(simconnect.KeySimEvent(ev.SimEvent))
 					event.RunWithValue(ev.Value)
-					fmt.Println(ev.SimEvent)
 				}
 			}
 			if event.componentType == 2 {
 				if len(device.configuration.Elements.Switches) >= event.componentNumber {
 					ev := device.configuration.Elements.Switches[event.componentNumber-1][event.action-1]
+					fmt.Println("Switches", event.componentNumber, event.action, ev.SimEvent)
 					event := sc.NewSimEvent(simconnect.KeySimEvent(ev.SimEvent))
 					event.RunWithValue(ev.Value)
-					fmt.Println(ev.SimEvent)
 				}
 			}
 			if event.componentType == 3 {
 				if len(device.configuration.Elements.Encoders) >= event.componentNumber {
 					ev := device.configuration.Elements.Encoders[event.componentNumber-1][event.action-1]
+					fmt.Println("Encoder", event.componentNumber, event.action, ev.SimEvent)
 					event := sc.NewSimEvent(simconnect.KeySimEvent(ev.SimEvent))
 					event.RunWithValue(ev.Value)
-					fmt.Println(ev.SimEvent)
 				}
 			}
 		}
 	}
 }
 
-//if event.eventType == 1{
-//  if event.componentType == 1 {
-//    if event.componentNumber == 1 {
-//      event := sc.NewSimEvent(sim.KeyG1000PfdMenuButton)
-//      event.RunWithValue(100)
-//      fmt.Println("KeyG1000PfdMenuButton")
-//    }
-//    if event.componentNumber == 2 {
-//      event := sc.NewSimEvent(sim.KeyG1000MfdMenuButton)
-//      event.RunWithValue(100)
-//      fmt.Println("KeyG1000MfdMenuButton")
-//    }
-//  }
-//  if event.componentType == 3 {
-//    if event.componentNumber == 1 {
-//      if event.action == 1 {
-//        event := sc.NewSimEvent(sim.KeyApAltVarDec)
-//        event.RunWithValue(100)
-//        fmt.Println("KeyApAltVarDec")
-//      }
-//      if event.action == 2 {
-//        event := sc.NewSimEvent(sim.KeyApAltVarInc)
-//        event.Run()
-//        fmt.Println("KeyApAltVarInc")
-//      }
-//    }
-//    if event.componentNumber == 2 {
-//      if event.action == 1 {
-//        event := sc.NewSimEvent(sim.KeyComRadioFractInc)
-//        event.Run()
-//        fmt.Println("KeyComRadioFractInc")
-//      }
-//      if event.action == 2 {
-//        event := sc.NewSimEvent(sim.KeyComRadioFractDec)
-//        event.Run()
-//        fmt.Println("KeyComRadioFractDec")
-//      }
-//    }
-//  }
-//}
-//}
+var deviceEvents []deviceEvent
+
+func goEvents(sc *simconnect.EasySimConnect, myDevices []*Device, c chan string) {
+	for msg := range c {
+		incomingEvents, err := collectEvents(msg)
+		if err != nil {
+		}
+		deviceEvents = append(deviceEvents, incomingEvents...)
+		for len(deviceEvents) > 0 {
+			event := deviceEvents[0]
+			deviceEvents = deviceEvents[1:]
+			executeEvents(sc, event, myDevices)
+		}
+	}
+}
