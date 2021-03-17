@@ -40,12 +40,6 @@ func main() {
 
 	//go goEvents(sc, myDevices, portChannel)
 
-	//go (func(){
-	//	for {
-	// 	Example_getSimVar()
-	//	}
-	//})()
-
 	go connectToSimVars(sc)
 
 	time.Sleep(3 * time.Second)
@@ -53,6 +47,7 @@ func main() {
 	event.Run()
 
 	for {
-		time.Sleep(time.Second * 1000)
+		fmt.Println(sc.IsAlive())
+		time.Sleep(time.Second * 3)
 	}
 }
