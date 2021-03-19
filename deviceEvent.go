@@ -72,8 +72,6 @@ func executeEvents(sc *simconnect.EasySimConnect, event deviceEvent, devices []*
 	if event.eventType != 1 {
 		return
 	}
-	fmt.Println(sc.IsAlive())
-
 	for _, device := range devices {
 		if device.id == event.device {
 			if event.componentType == 1 {
@@ -106,7 +104,7 @@ func executeEvents(sc *simconnect.EasySimConnect, event deviceEvent, devices []*
 
 var deviceEvents []deviceEvent
 
-func goEvents(sc *simconnect.EasySimConnect, myDevices []*Device, c chan string) {
+func startSendEvents(sc *simconnect.EasySimConnect, myDevices []*Device, c chan string) {
 	for msg := range c {
 		incomingEvents, err := collectEvents(msg)
 		if err != nil {

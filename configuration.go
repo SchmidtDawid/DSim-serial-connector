@@ -24,7 +24,7 @@ type Action struct {
 	Value    int    `json:"value"`
 }
 
-func readConfiguration(file string) Config {
+func readConfigurationFromFile(file string) Config {
 	jsonFile, err := os.Open(file)
 	if err != nil {
 		fmt.Println(err)
@@ -47,7 +47,7 @@ func readConfiguration(file string) Config {
 }
 
 func (d *Device) updateConfiguration() {
-	c := readConfiguration(d.configFile)
+	c := readConfigurationFromFile(d.configFile)
 	d.configuration = c
 }
 
