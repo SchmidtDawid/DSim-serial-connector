@@ -4,15 +4,15 @@
       [
         {
           "action": 1,
-          "simEvent": "TOGGLE_MASTER_BATTERY",
-          "value": null
+          "simEvent": "SET_MASTER_ALTERNATOR",
+          "value": 1
         }
       ],
       [
         {
           "action": 1,
-          "simEvent": "TOGGLE_MASTER_ALTERNATOR",
-          "value": null
+          "simEvent": "SET_MASTER_BATTERY",
+          "value": 1
         }
       ]
     ],
@@ -21,12 +21,12 @@
       [
         {
           "action": 1,
-          "simEvent": "COM_RADIO_WHOLE_INC",
+          "simEvent": "KeyXpndr",
           "value": null
         },
         {
           "action": 2,
-          "simEvent": "COM_RADIO_WHOLE_DEC",
+          "simEvent": "XPNDR_INC_CARRY",
           "value": null
         }
       ],

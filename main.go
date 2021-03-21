@@ -7,24 +7,35 @@ import (
 
 func main() {
 
+	testChannel := make(chan string)
 	portChannel := make(chan string)
 	ports, _ := findOpenPorts()
 	myDevices := checkDeviceOnPorts(ports)
+
+	connected := false
+	for !connected {
+		go testConnection(testChannel)
+		if <-testChannel != "connection fail" {
+			connected = true
+		}
+	}
 
 	readDevices(myDevices, portChannel)
 	go keepUpdateConfig(myDevices)
 
 	eventSC, _ := scConnect("MSFS_events")
-	varReveiveSC, _ := scConnect("MSFS_vars")
-	varReveiveSC.SetDelay(50 * time.Millisecond)
+	varReceiveSC, _ := scConnect("MSFS_vars")
+	varReceiveSC.SetDelay(200 * time.Millisecond)
 
 	go startSendEvents(eventSC, myDevices, portChannel)
-	go startGettingVars(varReveiveSC)
+
+	cSimVar := registerVars(varReceiveSC)
+	go startGettingVars(cSimVar)
 
 	for {
 		if eventSC.IsAlive() {
 			fmt.Println("event simconnect is alive")
 		}
-		time.Sleep(time.Second * 10)
+		time.Sleep(time.Millisecond * 10000)
 	}
 }

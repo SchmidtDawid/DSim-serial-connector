@@ -53,8 +53,8 @@ func (d *Device) updateConfiguration() {
 
 func keepUpdateConfig(devices []*Device) {
 	for range time.Tick(time.Second * 2) {
-		//for _, device := range devices {
-		devices[0].updateConfiguration()
-		//}
+		for _, device := range devices {
+			device.updateConfiguration()
+		}
 	}
 }
