@@ -31,8 +31,8 @@ func newDevice(device string, port string) (Device, error) {
 		intParams = append(intParams, intParam)
 	}
 
-	configFile := "config_" + strconv.Itoa(intParams[1]) + ".json"
-	configuration := readConfigurationFromFile(configFile)
+	configFile := "config_" + strconv.Itoa(intParams[1])
+	configuration := readConfigurationFromFile(configFile, "default")
 
 	return Device{
 		intParams[1],

@@ -10,12 +10,18 @@ import (
 
 func registerVars(sc *simconnect.EasySimConnect) <-chan []simconnect.SimVar {
 	cSimVar, err := sc.ConnectToSimVar(
-		simconnect.SimVarPlaneAltitude(),
-		simconnect.SimVarPlaneLatitude(simconnect.UnitDegrees),
-		simconnect.SimVarPlaneLongitude(),
-		simconnect.SimVarIndicatedAltitude(),
-		simconnect.SimVarGeneralEngRpm(1),
-		simconnect.SimVarAutopilotMaster(),
+	//simconnect.SimVarPlaneAltitude(),
+	//simconnect.SimVarPlaneLatitude(simconnect.UnitDegrees),
+	//simconnect.SimVarPlaneLongitude(),
+	//simconnect.SimVarIndicatedAltitude(),
+	//simconnect.SimVarGeneralEngRpm(1),
+	//simconnect.SimVarAutopilotMaster(),
+	//simconnect.SimVar{
+	//	Index:    0,
+	//	Name:     "AUTOPILOT MASTER",
+	//	Unit:     "Bool",
+	//	Settable: true,
+	//},
 	)
 	if err != nil {
 		fmt.Println("Can not register Vars")

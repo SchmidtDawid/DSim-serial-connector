@@ -3,8 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/micmonay/simconnect"
 	"io/ioutil"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -24,16 +26,26 @@ type Action struct {
 	Value    int    `json:"value"`
 }
 
-func readConfigurationFromFile(file string) Config {
-	jsonFile, err := os.Open(file)
+func readConfigurationFromFile(file string, planeName string) Config {
+
+	optionalFileName := file + "_" + strings.ToLower(strings.ReplaceAll(planeName, " ", "_"))
+
+	var jsonFile *os.File
+	var err error
+
+	jsonFile, err = os.Open(optionalFileName + ".json")
 	if err != nil {
-		fmt.Println(err)
+		jsonFile, err = os.Open(file + "_default" + ".json")
+		if err != nil {
+			fmt.Println(err)
+		}
 	}
+
 	//fmt.Println("Successfully Opened", file)
 	defer jsonFile.Close()
 
-	byteValue, err := ioutil.ReadAll(jsonFile)
-	if err != nil {
+	byteValue, bErr := ioutil.ReadAll(jsonFile)
+	if bErr != nil {
 		fmt.Println(err)
 	}
 
@@ -46,15 +58,33 @@ func readConfigurationFromFile(file string) Config {
 	return config
 }
 
-func (d *Device) updateConfiguration() {
-	c := readConfigurationFromFile(d.configFile)
+func (d *Device) updateConfiguration(planeName string) {
+	c := readConfigurationFromFile(d.configFile, planeName)
 	d.configuration = c
 }
 
-func keepUpdateConfig(devices []*Device) {
+func keepUpdateConfig(devices []*Device, sc *simconnect.EasySimConnect) {
+	cSimVar, err := sc.ConnectToSimVar(
+		simconnect.SimVarTitle(),
+	)
+	if err != nil {
+		fmt.Println("Can not register Vars")
+	}
+
+	var result []simconnect.SimVar
+	var planeName string
+
 	for range time.Tick(time.Second * 2) {
+
+		result = <-cSimVar
+		for _, simVar := range result {
+			if strings.Contains(string(simVar.Unit), "String") {
+				planeName = simVar.GetString()
+			}
+		}
+
 		for _, device := range devices {
-			device.updateConfiguration()
+			device.updateConfiguration(planeName)
 		}
 	}
 }

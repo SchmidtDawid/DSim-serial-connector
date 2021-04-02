@@ -21,11 +21,14 @@ func main() {
 	}
 
 	readDevices(myDevices, portChannel)
-	go keepUpdateConfig(myDevices)
 
 	eventSC, _ := scConnect("MSFS_events")
 	varReceiveSC, _ := scConnect("MSFS_vars")
 	varReceiveSC.SetDelay(200 * time.Millisecond)
+	planeSC, _ := scConnect("MSFS_plane")
+	planeSC.SetDelay(2 * time.Second)
+
+	go keepUpdateConfig(myDevices, planeSC)
 
 	go startSendEvents(eventSC, myDevices, portChannel)
 
