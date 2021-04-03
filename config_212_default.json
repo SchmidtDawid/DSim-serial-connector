@@ -1,0 +1,117 @@
+{
+  "config": {
+    "buttons": [],
+    "switches": [
+      [
+        {
+          "action": 1,
+          "simEvent": "FUEL_SELECTOR_LEFT",
+          "value": 0
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "FUEL_SELECTOR_CENTER",
+          "value": 0
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "FUEL_SELECTOR_RIGHT",
+          "value": 0
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "GEAR_UP",
+          "value": 0
+        },{
+          "action": 1,
+          "simEvent": "GEAR_DOWN",
+          "value": 0
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "PITOT_HEAT_ON",
+          "value": 0
+        },{
+          "action": 1,
+          "simEvent": "PITOT_HEAT_OFF",
+          "value": 0
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "TOGGLE_PROPELLER_DEICE",
+          "value": 0
+        },{
+          "action": 1,
+          "simEvent": "TOGGLE_PROPELLER_DEICE",
+          "value": 0
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "NONE",
+          "value": 0
+        },{
+          "action": 1,
+          "simEvent": "NONE",
+          "value": 0
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "TOGGLE_STRUCTURAL_DEICE",
+          "value": 0
+        },{
+          "action": 1,
+          "simEvent": "TOGGLE_STRUCTURAL_DEICE",
+          "value": 0
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "NONE",
+          "value": 0
+        },{
+          "action": 1,
+          "simEvent": "NONE",
+          "value": 0
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "NONE",
+          "value": 0
+        },{
+          "action": 1,
+          "simEvent": "NONE",
+          "value": 0
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "NONE",
+          "value": 0
+        },{
+          "action": 1,
+          "simEvent": "NONE",
+          "value": 0
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "TOGGLE_ELECT_FUEL_PUMP",
+          "value": 0
+        },{
+          "action": 1,
+          "simEvent": "TOGGLE_ELECT_FUEL_PUMP",
+          "value": 0
+        }
+      ]
+    ],
+    "encoders": []
+  }
+}

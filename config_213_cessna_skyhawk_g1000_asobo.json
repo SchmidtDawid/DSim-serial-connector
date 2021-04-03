@@ -10,7 +10,7 @@
       ],[
         {
           "action": 1,
-          "simEvent": "COM2_RADIO_SWAP",
+          "simEvent": "MobiFlight.AS1000_MFD_FMS_Upper_PUSH",
           "value": 1
         }
       ],[
@@ -22,55 +22,55 @@
       ],[
         {
           "action": 1,
-          "simEvent": "COM2_RADIO_SWAP",
+          "simEvent": "MobiFlight.AS1000_MFD_ENT_Push",
           "value": 1
         }
       ],[
         {
           "action": 1,
-          "simEvent": "COM_STBY_RADIO_SWAP",
+          "simEvent": "MobiFlight.AS1000_PFD_COM_Push",
           "value": 1
         }
       ],[
         {
           "action": 1,
-          "simEvent": "NAV1_RADIO_SWAP",
+          "simEvent": "MobiFlight.AS1000_PFD_NAV_Push",
           "value": 1
         }
       ],[
         {
           "action": 1,
-          "simEvent": "COM_STBY_RADIO_SWAP",
+          "simEvent": "MobiFlight.AS1000_PFD_COM_Switch",
           "value": 1
         }
       ],[
         {
           "action": 1,
-          "simEvent": "NAV1_RADIO_SWAP",
+          "simEvent": "MobiFlight.AS1000_PFD_NAV_Switch",
           "value": 1
         }
       ],[
         {
           "action": 1,
-          "simEvent": "NAV1_RADIO_SWAP",
+          "simEvent": "MobiFlight.AS1000_PFD_COM_Push",
           "value": 1
         }
       ],[
         {
           "action": 1,
-          "simEvent": "NAV2_RADIO_SWAP",
+          "simEvent": "MobiFlight.AS1000_PFD_NAV_Push",
           "value": 1
         }
       ],[
         {
           "action": 1,
-          "simEvent": "NAV1_RADIO_SWAP",
+          "simEvent": "MobiFlight.AS1000_PFD_COM_Switch",
           "value": 1
         }
       ],[
         {
           "action": 1,
-          "simEvent": "NAV2_RADIO_SWAP",
+          "simEvent": "MobiFlight.AS1000_PFD_NAV_Switch",
           "value": 1
         }
       ],[
@@ -140,133 +140,133 @@
       [
         {
           "action": 1,
-          "simEvent": "COM_RADIO_WHOLE_INC",
+          "simEvent": "MobiFlight.AS1000_MFD_RANGE_INC",
           "value": null
         },
         {
           "action": 2,
-          "simEvent": "COM_RADIO_WHOLE_DEC",
+          "simEvent": "MobiFlight.AS1000_MFD_RANGE_DEC",
           "value": null
         }
       ],[
         {
           "action": 1,
-          "simEvent": "COM_RADIO_FRACT_INC",
+          "simEvent": "MobiFlight.AS1000_MFD_BARO_INC",
           "value": null
         },
         {
           "action": 2,
-          "simEvent": "COM_RADIO_FRACT_DEC",
+          "simEvent": "MobiFlight.AS1000_MFD_BARO_dec",
           "value": null
         }
       ],[
         {
           "action": 1,
-          "simEvent": "COM2_RADIO_WHOLE_INC",
+          "simEvent": "MobiFlight.AS1000_MFD_FMS_Lower_INC",
           "value": null
         },
         {
           "action": 2,
-          "simEvent": "COM2_RADIO_WHOLE_DEC",
+          "simEvent": "MobiFlight.AS1000_MFD_FMS_Lower_DEC",
           "value": null
         }
       ],[
         {
           "action": 1,
-          "simEvent": "COM2_RADIO_FRACT_INC",
+          "simEvent": "MobiFlight.AS1000_MFD_FMS_Upper_INC",
           "value": null
         },
         {
           "action": 2,
-          "simEvent": "COM2_RADIO_FRACT_DEC",
+          "simEvent": "MobiFlight.AS1000_MFD_FMS_Upper_DEC",
           "value": null
         }
       ],[
         {
           "action": 1,
-          "simEvent": "COM_RADIO_WHOLE_INC",
+          "simEvent": "MobiFlight.AS1000_PFD_COM_Large_INC",
           "value": null
         },
         {
           "action": 2,
-          "simEvent": "COM_RADIO_WHOLE_DEC",
+          "simEvent": "MobiFlight.AS1000_PFD_COM_Large_DEC",
           "value": null
         }
       ],[
         {
           "action": 1,
-          "simEvent": "COM_RADIO_FRACT_INC",
+          "simEvent": "MobiFlight.AS1000_PFD_COM_Small_INC",
           "value": null
         },
         {
           "action": 2,
-          "simEvent": "COM_RADIO_FRACT_DEC",
+          "simEvent": "MobiFlight.AS1000_PFD_COM_Small_DEC",
           "value": null
         }
       ],[
         {
           "action": 1,
-          "simEvent": "NAV1_RADIO_WHOLE_INC",
+          "simEvent": "MobiFlight.AS1000_PFD_NAV_Large_INC",
           "value": null
         },
         {
           "action": 2,
-          "simEvent": "NAV1_RADIO_WHOLE_DEC",
+          "simEvent": "MobiFlight.AS1000_PFD_NAV_Large_DEC",
           "value": null
         }
       ],[
         {
           "action": 1,
-          "simEvent": "NAV1_RADIO_FRACT_INC",
+          "simEvent": "MobiFlight.AS1000_PFD_NAV_Small_INC",
           "value": null
         },
         {
           "action": 2,
-          "simEvent": "NAV1_RADIO_FRACT_DEC",
+          "simEvent": "MobiFlight.AS1000_PFD_NAV_Small_DEC",
           "value": null
         }
       ],[
         {
           "action": 1,
-          "simEvent": "NAV1_RADIO_WHOLE_INC",
+          "simEvent": "MobiFlight.AS1000_PFD_COM_Large_INC",
           "value": null
         },
         {
           "action": 2,
-          "simEvent": "NAV1_RADIO_WHOLE_DEC",
+          "simEvent": "MobiFlight.AS1000_PFD_COM_Large_DEC",
           "value": null
         }
       ],[
         {
           "action": 1,
-          "simEvent": "NAV1_RADIO_FRACT_INC",
+          "simEvent": "MobiFlight.AS1000_PFD_COM_Small_INC",
           "value": null
         },
         {
           "action": 2,
-          "simEvent": "NAV1_RADIO_FRACT_DEC",
+          "simEvent": "MobiFlight.AS1000_PFD_COM_Small_DEC",
           "value": null
         }
       ],[
         {
           "action": 1,
-          "simEvent": "NAV2_RADIO_WHOLE_INC",
+          "simEvent": "MobiFlight.AS1000_PFD_NAV_Large_INC",
           "value": null
         },
         {
           "action": 2,
-          "simEvent": "NAV2_RADIO_WHOLE_DEC",
+          "simEvent": "MobiFlight.AS1000_PFD_NAV_Large_DEC",
           "value": null
         }
       ],[
         {
           "action": 1,
-          "simEvent": "NAV2_RADIO_FRACT_INC",
+          "simEvent": "MobiFlight.AS1000_PFD_NAV_Small_INC",
           "value": null
         },
         {
           "action": 2,
-          "simEvent": "NAV2_RADIO_FRACT_DEC",
+          "simEvent": "MobiFlight.AS1000_PFD_NAV_Small_DEC",
           "value": null
         }
       ],[
