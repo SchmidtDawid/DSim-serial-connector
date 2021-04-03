@@ -75,7 +75,8 @@ func executeEvents(sc *simconnect.EasySimConnect, event deviceEvent, devices []*
 	for _, device := range devices {
 		if device.id == event.device {
 			if event.componentType == 1 {
-				if len(device.configuration.Elements.Buttons) >= event.componentNumber {
+				if len(device.configuration.Elements.Buttons) >= event.componentNumber &&
+					len(device.configuration.Elements.Buttons[event.componentNumber-1]) >= event.action {
 					ev := device.configuration.Elements.Buttons[event.componentNumber-1][event.action-1]
 					fmt.Println("Button", event.componentNumber, event.action, ev.SimEvent)
 					event := sc.NewSimEvent(simconnect.KeySimEvent(ev.SimEvent))
@@ -83,7 +84,8 @@ func executeEvents(sc *simconnect.EasySimConnect, event deviceEvent, devices []*
 				}
 			}
 			if event.componentType == 2 {
-				if len(device.configuration.Elements.Switches) >= event.componentNumber {
+				if len(device.configuration.Elements.Switches) >= event.componentNumber &&
+					len(device.configuration.Elements.Switches[event.componentNumber-1]) >= event.action {
 					ev := device.configuration.Elements.Switches[event.componentNumber-1][event.action-1]
 					fmt.Println("Switches", event.componentNumber, event.action, ev.SimEvent)
 					event := sc.NewSimEvent(simconnect.KeySimEvent(ev.SimEvent))
@@ -91,7 +93,8 @@ func executeEvents(sc *simconnect.EasySimConnect, event deviceEvent, devices []*
 				}
 			}
 			if event.componentType == 3 {
-				if len(device.configuration.Elements.Encoders) >= event.componentNumber {
+				if len(device.configuration.Elements.Encoders) >= event.componentNumber &&
+					len(device.configuration.Elements.Encoders[event.componentNumber-1]) >= event.action {
 					ev := device.configuration.Elements.Encoders[event.componentNumber-1][event.action-1]
 					fmt.Println("Encoder", event.componentNumber, event.action, ev.SimEvent)
 					event := sc.NewSimEvent(simconnect.KeySimEvent(ev.SimEvent))

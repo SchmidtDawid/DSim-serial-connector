@@ -8,7 +8,8 @@ import (
 func main() {
 
 	testChannel := make(chan string)
-	portChannel := make(chan string)
+	cComReceive := make(chan string)
+	cComSend := make(chan []string)
 	ports, _ := findOpenPorts()
 	myDevices := checkDeviceOnPorts(ports)
 
@@ -20,20 +21,20 @@ func main() {
 		}
 	}
 
-	readDevices(myDevices, portChannel)
+	connectDevices(myDevices, cComReceive, cComSend)
 
 	eventSC, _ := scConnect("MSFS_events")
 	varReceiveSC, _ := scConnect("MSFS_vars")
-	varReceiveSC.SetDelay(200 * time.Millisecond)
+	varReceiveSC.SetDelay(50 * time.Millisecond)
 	planeSC, _ := scConnect("MSFS_plane")
 	planeSC.SetDelay(2 * time.Second)
 
 	go keepUpdateConfig(myDevices, planeSC)
 
-	go startSendEvents(eventSC, myDevices, portChannel)
+	go startSendEvents(eventSC, myDevices, cComReceive)
 
 	cSimVar := registerVars(varReceiveSC)
-	go startGettingVars(cSimVar)
+	go startGettingVars(cSimVar, cComSend)
 
 	for {
 		if eventSC.IsAlive() {

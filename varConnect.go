@@ -10,18 +10,40 @@ import (
 
 func registerVars(sc *simconnect.EasySimConnect) <-chan []simconnect.SimVar {
 	cSimVar, err := sc.ConnectToSimVar(
-	//simconnect.SimVarPlaneAltitude(),
-	//simconnect.SimVarPlaneLatitude(simconnect.UnitDegrees),
-	//simconnect.SimVarPlaneLongitude(),
-	//simconnect.SimVarIndicatedAltitude(),
-	//simconnect.SimVarGeneralEngRpm(1),
-	//simconnect.SimVarAutopilotMaster(),
-	//simconnect.SimVar{
-	//	Index:    0,
-	//	Name:     "AUTOPILOT MASTER",
-	//	Unit:     "Bool",
-	//	Settable: true,
-	//},
+		simconnect.SimVar{
+			Index:    1,
+			Name:     "COM ACTIVE FREQUENCY:1",
+			Unit:     "MHz",
+			Settable: false,
+		},
+		simconnect.SimVar{
+			Index:    1,
+			Name:     "COM STANDBY FREQUENCY:1",
+			Unit:     "MHz",
+			Settable: false,
+		},
+		simconnect.SimVar{
+			Index:    2,
+			Name:     "COM ACTIVE FREQUENCY:2",
+			Unit:     "MHz",
+			Settable: false,
+		},
+		simconnect.SimVar{
+			Index:    2,
+			Name:     "COM STANDBY FREQUENCY:2",
+			Unit:     "MHz",
+			Settable: false,
+		},
+		simconnect.SimVarNavActiveFrequency(1),
+		simconnect.SimVarNavStandbyFrequency(1),
+		simconnect.SimVarNavActiveFrequency(2),
+		simconnect.SimVarNavStandbyFrequency(2),
+		//simconnect.SimVar{
+		//	Index:    0,
+		//	Name:     "AUTOPILOT MASTER",
+		//	Unit:     "Bool",
+		//	Settable: true,
+		//},
 	)
 	if err != nil {
 		fmt.Println("Can not register Vars")
@@ -30,27 +52,30 @@ func registerVars(sc *simconnect.EasySimConnect) <-chan []simconnect.SimVar {
 	return cSimVar
 }
 
-func startGettingVars(c <-chan []simconnect.SimVar) error {
+func startGettingVars(c <-chan []simconnect.SimVar, cSnd chan []string) error {
 	for {
+		var vars []string
 		select {
 		case result := <-c:
 			for _, simVar := range result {
 				var f float64
 				var err error
 				if strings.Contains(string(simVar.Unit), "String") {
-					log.Printf("%s : %#v\n", simVar.Name, simVar.GetString())
+					//log.Printf("%s : %#v\n", simVar.Name, simVar.GetString())
+					vars = append(vars, simVar.GetString())
 				} else if simVar.Unit == "SIMCONNECT_DATA_LATLONALT" {
-					data, _ := simVar.GetDataLatLonAlt()
-					log.Printf("%s : %#v\n", simVar.Name, data)
+					//data, _ := simVar.GetDataLatLonAlt()
+					//log.Printf("%s : %#v\n", simVar.Name, data)
 				} else if simVar.Unit == "SIMCONNECT_DATA_XYZ" {
-					data, _ := simVar.GetDataXYZ()
-					log.Printf("%s : %#v\n", simVar.Name, data)
+					//data, _ := simVar.GetDataXYZ()
+					//log.Printf("%s : %#v\n", simVar.Name, data)
 				} else if simVar.Unit == "SIMCONNECT_DATA_WAYPOINT" {
-					data, _ := simVar.GetDataWaypoint()
-					log.Printf("%s : %#v\n", simVar.Name, data)
+					//data, _ := simVar.GetDataWaypoint()
+					//log.Printf("%s : %#v\n", simVar.Name, data)
 				} else {
 					f, err = simVar.GetFloat64()
-					log.Println(simVar.Name, fmt.Sprintf("%f", f))
+					//log.Println(simVar.Name, fmt.Sprintf("%f", f))
+					vars = append(vars, fmt.Sprintf("%f", f))
 				}
 				if err != nil {
 					log.Println("return error :", err)
@@ -60,6 +85,8 @@ func startGettingVars(c <-chan []simconnect.SimVar) error {
 		case <-time.After(5 * time.Second):
 			return fmt.Errorf("Can't Connect to MSFS")
 		}
+
+		cSnd <- vars
 	}
 }
 
@@ -68,11 +95,6 @@ func testConnection(c chan string) {
 
 	cSimVar, err := sc.ConnectToSimVar(
 		simconnect.SimVarPlaneAltitude(),
-		simconnect.SimVarPlaneLatitude(simconnect.UnitDegrees),
-		simconnect.SimVarPlaneLongitude(),
-		simconnect.SimVarIndicatedAltitude(),
-		simconnect.SimVarGeneralEngRpm(1),
-		simconnect.SimVarAutopilotMaster(),
 	)
 	if err != nil {
 		fmt.Println("Can not register Vars")

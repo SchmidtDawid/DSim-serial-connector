@@ -5,6 +5,7 @@ import (
 	"github.com/tarm/serial"
 	"log"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -15,7 +16,7 @@ func findOpenPorts() ([]string, []string) {
 	for i := 1; i < 50; i++ {
 		portName := "COM" + strconv.Itoa(i)
 
-		config := &serial.Config{Name: portName, Baud: 57600}
+		config := &serial.Config{Name: portName, Baud: 38400}
 		s, err := serial.OpenPort(config)
 		if err != nil {
 			closedPorts = append(closedPorts, portName)
@@ -34,13 +35,13 @@ func checkDeviceOnPorts(ports []string) []*Device {
 
 	for _, port := range ports {
 		//fmt.Println("test", port)
-		config := &serial.Config{Name: port, Baud: 57600, ReadTimeout: time.Millisecond * 100}
+		config := &serial.Config{Name: port, Baud: 38400, ReadTimeout: time.Millisecond * 100}
 		s, err := serial.OpenPort(config)
 		if err != nil {
 			fmt.Println(err)
 		} else {
 			go s.Write([]byte("?"))
-			time.Sleep(time.Millisecond * 1000)
+			time.Sleep(time.Millisecond * 2000)
 			buf := make([]byte, 128)
 			n, err := s.Read(buf)
 			if err != nil {
@@ -62,26 +63,15 @@ func checkDeviceOnPorts(ports []string) []*Device {
 	return myDevices
 }
 
-func readPorts(ports []string, c chan string) {
-	for _, port := range ports {
-		config := &serial.Config{Name: port, Baud: 57600}
-		s, err := serial.OpenPort(config)
-		if err != nil {
-			fmt.Println(err)
-		} else {
-			go readCom(s, c)
-		}
-	}
-}
-
-func readDevices(devices []*Device, c chan string) {
+func connectDevices(devices []*Device, cRec chan string, cSnd chan []string) {
 	for _, device := range devices {
-		config := &serial.Config{Name: device.port, Baud: 57600}
+		config := &serial.Config{Name: device.port, Baud: 38400}
 		s, err := serial.OpenPort(config)
 		if err != nil {
 			fmt.Println(err)
 		} else {
-			go readCom(s, c)
+			go readCom(s, cRec)
+			go writeCom(s, cSnd)
 		}
 	}
 }
@@ -94,5 +84,19 @@ func readCom(s *serial.Port, c chan string) {
 			log.Fatal(err)
 		}
 		c <- string(buf[:n])
+	}
+}
+
+func writeCom(s *serial.Port, c chan []string) {
+	currentTransmision := ""
+	lastTransmision := ""
+	for vars := range c {
+		currentTransmision = strings.Join(vars, ",")
+		if currentTransmision != lastTransmision {
+			transmit := currentTransmision + ",error" + ";"
+			fmt.Println(transmit)
+			s.Write([]byte(transmit))
+			lastTransmision = currentTransmision
+		}
 	}
 }

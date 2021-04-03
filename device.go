@@ -15,6 +15,7 @@ type Device struct {
 }
 
 func newDevice(device string, port string) (Device, error) {
+	fmt.Println(device)
 	device = strings.Split(device, ";")[0]
 	params := strings.Split(device, ",")
 	if len(params) != 5 {

@@ -52,7 +52,7 @@ func readConfigurationFromFile(file string, planeName string) Config {
 	var config Config
 	err = json.Unmarshal(byteValue, &config)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println(file, err)
 	}
 
 	return config
