@@ -1,0 +1,319 @@
+{
+  "config": {
+    "buttons": [
+      [
+        {
+          "action": 1,
+          "simEvent": "COM_STBY_RADIO_SWAP",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "COM2_RADIO_SWAP",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "COM_STBY_RADIO_SWAP",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "COM2_RADIO_SWAP",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "COM_STBY_RADIO_SWAP",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "NAV1_RADIO_SWAP",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "COM_STBY_RADIO_SWAP",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "NAV1_RADIO_SWAP",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "NAV1_RADIO_SWAP",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "NAV2_RADIO_SWAP",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "NAV1_RADIO_SWAP",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "NAV2_RADIO_SWAP",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "BUTTON 13",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "BUTTON 14",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "BUTTON 15",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "BUTTON 16",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "COM1_TRANSMIT_SELECT",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "COM_RECEIVE_ALL_TOGGLE",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "COM2_TRANSMIT_SELECT",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "COM_RECEIVE_ALL_TOGGLE",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "BUTTON 21",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "BUTTON 22",
+          "value": 1
+        }
+      ]
+    ],
+    "switches": [],
+    "encoders": [
+      [
+        {
+          "action": 1,
+          "simEvent": "COM_RADIO_WHOLE_INC",
+          "value": null
+        },
+        {
+          "action": 2,
+          "simEvent": "COM_RADIO_WHOLE_DEC",
+          "value": null
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "COM_RADIO_FRACT_INC",
+          "value": null
+        },
+        {
+          "action": 2,
+          "simEvent": "COM_RADIO_FRACT_DEC",
+          "value": null
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "COM2_RADIO_WHOLE_INC",
+          "value": null
+        },
+        {
+          "action": 2,
+          "simEvent": "COM2_RADIO_WHOLE_DEC",
+          "value": null
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "COM2_RADIO_FRACT_INC",
+          "value": null
+        },
+        {
+          "action": 2,
+          "simEvent": "COM2_RADIO_FRACT_DEC",
+          "value": null
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "COM_RADIO_WHOLE_INC",
+          "value": null
+        },
+        {
+          "action": 2,
+          "simEvent": "COM_RADIO_WHOLE_DEC",
+          "value": null
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "COM_RADIO_FRACT_INC",
+          "value": null
+        },
+        {
+          "action": 2,
+          "simEvent": "COM_RADIO_FRACT_DEC",
+          "value": null
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "NAV1_RADIO_WHOLE_INC",
+          "value": null
+        },
+        {
+          "action": 2,
+          "simEvent": "NAV1_RADIO_WHOLE_DEC",
+          "value": null
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "KOHLSMAN_INC",
+          "value": null
+        },
+        {
+          "action": 2,
+          "simEvent": "KOHLSMAN_DEC",
+          "value": null
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "NAV1_RADIO_WHOLE_INC",
+          "value": null
+        },
+        {
+          "action": 2,
+          "simEvent": "NAV1_RADIO_WHOLE_DEC",
+          "value": null
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "NAV1_RADIO_FRACT_INC",
+          "value": null
+        },
+        {
+          "action": 2,
+          "simEvent": "NAV1_RADIO_FRACT_DEC",
+          "value": null
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "NAV2_RADIO_WHOLE_INC",
+          "value": null
+        },
+        {
+          "action": 2,
+          "simEvent": "NAV2_RADIO_WHOLE_DEC",
+          "value": null
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "NAV2_RADIO_FRACT_INC",
+          "value": null
+        },
+        {
+          "action": 2,
+          "simEvent": "NAV2_RADIO_FRACT_DEC",
+          "value": null
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "ENCODER 13",
+          "value": null
+        },
+        {
+          "action": 2,
+          "simEvent": "ENCODER 13",
+          "value": null
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "ENCODER 14",
+          "value": null
+        },
+        {
+          "action": 2,
+          "simEvent": "ENCODER 14",
+          "value": null
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "ENCODER 15",
+          "value": null
+        },
+        {
+          "action": 2,
+          "simEvent": "ENCODER 15",
+          "value": null
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "ENCODER 16",
+          "value": null
+        },
+        {
+          "action": 2,
+          "simEvent": "ENCODER 16",
+          "value": null
+        }
+      ]
+    ]
+  }
+}

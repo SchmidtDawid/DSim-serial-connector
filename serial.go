@@ -16,7 +16,7 @@ func findOpenPorts() ([]string, []string) {
 	for i := 1; i < 50; i++ {
 		portName := "COM" + strconv.Itoa(i)
 
-		config := &serial.Config{Name: portName, Baud: 38400}
+		config := &serial.Config{Name: portName, Baud: 57600}
 		s, err := serial.OpenPort(config)
 		if err != nil {
 			closedPorts = append(closedPorts, portName)
@@ -35,12 +35,12 @@ func checkDeviceOnPorts(ports []string) []*Device {
 
 	for _, port := range ports {
 		//fmt.Println("test", port)
-		config := &serial.Config{Name: port, Baud: 38400, ReadTimeout: time.Millisecond * 100}
+		config := &serial.Config{Name: port, Baud: 57600, ReadTimeout: time.Millisecond * 100}
 		s, err := serial.OpenPort(config)
 		if err != nil {
 			fmt.Println(err)
 		} else {
-			go s.Write([]byte("?"))
+			go s.Write([]byte("?;"))
 			time.Sleep(time.Millisecond * 2000)
 			buf := make([]byte, 128)
 			n, err := s.Read(buf)
@@ -65,13 +65,15 @@ func checkDeviceOnPorts(ports []string) []*Device {
 
 func connectDevices(devices []*Device, cRec chan string, cSnd chan []string) {
 	for _, device := range devices {
-		config := &serial.Config{Name: device.port, Baud: 38400}
+		config := &serial.Config{Name: device.port, Baud: 57600}
 		s, err := serial.OpenPort(config)
 		if err != nil {
 			fmt.Println(err)
 		} else {
 			go readCom(s, cRec)
-			go writeCom(s, cSnd)
+			if device.receiveData {
+				go writeCom(s, cSnd)
+			}
 		}
 	}
 }
@@ -93,7 +95,7 @@ func writeCom(s *serial.Port, c chan []string) {
 	for vars := range c {
 		currentTransmision = strings.Join(vars, ",")
 		if currentTransmision != lastTransmision {
-			transmit := currentTransmision + ",error" + ";"
+			transmit := currentTransmision + ",epmtyData" + ";"
 			fmt.Println(transmit)
 			s.Write([]byte(transmit))
 			lastTransmision = currentTransmision

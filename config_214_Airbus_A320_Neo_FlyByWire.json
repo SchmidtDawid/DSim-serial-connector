@@ -1,0 +1,150 @@
+{
+  "config": {
+    "buttons": [
+      [
+        {
+          "action": 1,
+          "simEvent": "AP_APR_HOLD",
+          "value": 0
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "SPEED_SLOT_INDEX_SET",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "AP_BC_HOLD",
+          "value": 0
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "HEADING_SLOT_INDEX_SET",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "A32NX.FCU_AP_1_PUSH",
+          "value": 0
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "VS_SLOT_INDEX_SET",
+          "value": -1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "TOGGLE_FLIGHT_DIRECTOR",
+          "value": 0
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "YAW_DAMPER_TOGGLE",
+          "value": 0
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "BTN",
+          "value": 0
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "ALTITUDE_SLOT_INDEX_SET",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "VS_SLOT_INDEX_SET",
+          "value": 2
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "AP_ALT_HOLD",
+          "value": 0
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "HEADING_SLOT_INDEX_SET",
+          "value": 2
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "ALTITUDE_SLOT_INDEX_SET",
+          "value": 2
+        }
+      ]
+    ],
+    "switches": [],
+    "encoders": [
+      [
+        {
+          "action": 1,
+          "simEvent": "HEADING_BUG_INC",
+          "value": 1
+        },
+        {
+          "action": 2,
+          "simEvent": "HEADING_BUG_DEC",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "AP_SPD_VAR_INC",
+          "value": 1
+        },
+        {
+          "action": 2,
+          "simEvent": "AP_SPD_VAR_DEC",
+          "value": 1
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "AP_ALT_VAR_INC",
+          "value": 1000
+        },
+        {
+          "action": 2,
+          "simEvent": "AP_ALT_VAR_DEC",
+          "value": 1000
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "AP_ALT_VAR_INC",
+          "value": 100
+        },
+        {
+          "action": 2,
+          "simEvent": "AP_ALT_VAR_DEC",
+          "value": 100
+        }
+      ],[
+        {
+          "action": 1,
+          "simEvent": "AP_VS_VAR_INC",
+          "value": null
+        },
+        {
+          "action": 2,
+          "simEvent": "AP_VS_VAR_DEC",
+          "value": null
+        }
+      ]
+    ]
+  }
+}

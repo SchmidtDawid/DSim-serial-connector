@@ -29,6 +29,7 @@ type Action struct {
 func readConfigurationFromFile(file string, planeName string) Config {
 
 	optionalFileName := file + "_" + strings.ToLower(strings.ReplaceAll(planeName, " ", "_"))
+	//fmt.Println(planeName)
 
 	var jsonFile *os.File
 	var err error

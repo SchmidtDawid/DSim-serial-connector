@@ -11,6 +11,7 @@ type Device struct {
 	id            int
 	port          string
 	configFile    string
+	receiveData   bool
 	configuration Config
 }
 
@@ -32,6 +33,11 @@ func newDevice(device string, port string) (Device, error) {
 		intParams = append(intParams, intParam)
 	}
 
+	receive := false
+	if intParams[2] != 0 {
+		receive = true
+	}
+
 	configFile := "config_" + strconv.Itoa(intParams[1])
 	configuration := readConfigurationFromFile(configFile, "default")
 
@@ -39,6 +45,7 @@ func newDevice(device string, port string) (Device, error) {
 		intParams[1],
 		port,
 		configFile,
+		receive,
 		configuration,
 	}, nil
 }
