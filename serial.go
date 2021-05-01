@@ -13,7 +13,7 @@ func findOpenPorts() ([]string, []string) {
 	var openPorts []string
 	var closedPorts []string
 
-	for i := 1; i < 50; i++ {
+	for i := 1; i < 500; i++ {
 		portName := "COM" + strconv.Itoa(i)
 
 		config := &serial.Config{Name: portName, Baud: 57600}
