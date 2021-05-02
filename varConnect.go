@@ -102,12 +102,12 @@ func testConnection(c chan string) {
 
 	select {
 	case _ = <-cSimVar:
-		c <- "connection success"
+		c <- "serial success"
 	case <-time.After(10 * time.Second):
 		{
 			sc.Close()
-			fmt.Println("connection failed")
-			c <- "connection fail"
+			fmt.Println("serial failed")
+			c <- "serial fail"
 		}
 	}
 }

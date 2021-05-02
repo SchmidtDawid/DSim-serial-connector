@@ -1,24 +1,52 @@
 package main
 
+import (
+	"fmt"
+	"time"
+)
+
+var cDevicesReceive = make(chan string)
+
 func main() {
 
 	//testChannel := make(chan string)
-	//cComReceive := make(chan string)
 	//cComSend := make(chan []string)
 	//ports, _ := findActivePorts()
 	//myDevices := checkDeviceOnPorts(ports)
 
-	getConnectedDevices()
+	devices := newDevices()
+	devices.getConnectedDevices()
+	devices.connectToDevices()
+	devices.listenDevices()
+	for _, device := range devices {
+		fmt.Println(*device)
+	}
+
+	for msg := range cDevicesReceive {
+		fmt.Println(string(msg))
+		//incomingEvents, err := collectEvents(msg)
+		//if err != nil {
+		//}
+		//deviceEvents = append(deviceEvents, incomingEvents...)
+		//for len(deviceEvents) > 0 {
+		//	event := deviceEvents[0]
+		//	deviceEvents = deviceEvents[1:]
+		//	executeEvents(sc, event, myDevices)
+		//}
+	}
+
+	time.Now()
+	time.Sleep(time.Millisecond * 30000)
 
 	//connected := false
 	//for !connected {
 	//	go testConnection(testChannel)
-	//	if <-testChannel != "connection fail" {
+	//	if <-testChannel != "serial fail" {
 	//		connected = true
 	//	}
 	//}
 	//
-	//connectDevices(myDevices, cComReceive, cComSend)
+	//connectDevices(myDevices, cDevicesReceive, cComSend)
 	//
 	//eventSC, _ := scConnect("MSFS_events")
 	//varReceiveSC, _ := scConnect("MSFS_vars")
@@ -28,7 +56,7 @@ func main() {
 	//
 	//go keepUpdateConfig(myDevices, planeSC)
 	//
-	//go startSendEvents(eventSC, myDevices, cComReceive)
+	//go startSendEvents(eventSC, myDevices, cDevicesReceive)
 	//
 	//cSimVar := registerVars(varReceiveSC)
 	//go startGettingVars(cSimVar, cComSend)

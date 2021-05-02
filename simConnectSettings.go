@@ -24,7 +24,7 @@ func scConnect(appName string) (*simconnect.EasySimConnect, error) {
 		} else {
 			connected = true
 		}
-		<-c // Wait connection confirmation
+		<-c // Wait serial confirmation
 	}
 
 	return sc, nil
