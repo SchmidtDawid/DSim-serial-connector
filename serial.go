@@ -1,25 +1,32 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"github.com/tarm/serial"
 	"log"
+	"os"
 	"strconv"
 	"strings"
 	"time"
 )
 
-func findOpenPorts() ([]string, []string) {
+func findActivePorts() ([]string, []string) {
 	var openPorts []string
 	var closedPorts []string
 
-	for i := 1; i < 500; i++ {
+	for i := 1; i < 100; i++ {
 		portName := "COM" + strconv.Itoa(i)
 
 		config := &serial.Config{Name: portName, Baud: 57600}
 		s, err := serial.OpenPort(config)
 		if err != nil {
-			closedPorts = append(closedPorts, portName)
+			if errors.Is(err, os.ErrPermission) {
+				closedPorts = append(closedPorts, portName)
+			}
+			//if err.Error() == "Access is denied." {
+			//	closedPorts = append(closedPorts, portName)
+			//}
 		} else {
 			openPorts = append(openPorts, portName)
 			_ = s.Close()
