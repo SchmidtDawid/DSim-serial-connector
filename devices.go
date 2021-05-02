@@ -8,8 +8,8 @@ func newDevices() Devices {
 }
 
 func (d *Devices) getConnectedDevices() {
-	openedPorts, closedPorts := findActivePorts()
-	allPorts := append(openedPorts, closedPorts...)
+	openedPorts, busyPorts := findActivePorts()
+	allPorts := append(openedPorts, busyPorts...)
 
 	for _, port := range allPorts {
 		*d = append(*d, newEmptyDevice(port))
@@ -31,6 +31,6 @@ func (d *Devices) askDevices() {
 
 func (d *Devices) listenDevices() {
 	for _, device := range *d {
-		device.listen()
+		go device.listen()
 	}
 }

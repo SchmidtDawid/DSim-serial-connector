@@ -5,8 +5,6 @@ import (
 	"time"
 )
 
-var cDevicesReceive = make(chan string)
-
 func main() {
 
 	//testChannel := make(chan string)
@@ -23,14 +21,15 @@ func main() {
 	}
 
 	for msg := range cDevicesReceive {
-		fmt.Println(string(msg))
-		//incomingEvents, err := collectEvents(msg)
+		fmt.Println(msg.device.port)
+		//incomingEvents, err := collectEvents(msg.msg)
 		//if err != nil {
 		//}
 		//deviceEvents = append(deviceEvents, incomingEvents...)
 		//for len(deviceEvents) > 0 {
 		//	event := deviceEvents[0]
 		//	deviceEvents = deviceEvents[1:]
+		//	fmt.Println(event)
 		//	executeEvents(sc, event, myDevices)
 		//}
 	}

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/tarm/serial"
+	"log"
 	"time"
 )
 
@@ -18,8 +19,17 @@ type Device struct {
 	lastSeen        time.Time
 }
 
+type DeviceMsg struct {
+	device *Device
+	msg    string
+}
+
+var cDevicesReceive = make(chan DeviceMsg)
+
 func newEmptyDevice(port string) *Device {
-	return &Device{port: port}
+	return &Device{
+		port: port,
+	}
 }
 
 //func newDevice(device string, port string) (Device, error) {
@@ -70,17 +80,17 @@ func (d *Device) connect() {
 }
 
 func (d *Device) listen() {
-	go readCom(d.serial, cDevicesReceive)
-	//buf := make([]byte, 128)
-	//n, err := d.serial.Read(buf)
-	//if err != nil {
-	// log.Fatal(err)
-	//} else {
-	// fmt.Println(string(buf[:n]))
-	// if string(buf[0]) == "3" {
-	//   fmt.Println("presentation")
-	// }
-	//}
+	for {
+		buf := make([]byte, 100)
+		n, err := d.serial.Read(buf)
+		if err != nil {
+			log.Fatal(err)
+		}
+		cDevicesReceive <- DeviceMsg{
+			d,
+			string(buf[:n]),
+		}
+	}
 }
 
 func (d *Device) ask() {

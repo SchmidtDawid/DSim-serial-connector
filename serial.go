@@ -12,7 +12,7 @@ import (
 
 func findActivePorts() ([]string, []string) {
 	var openPorts []string
-	var closedPorts []string
+	var busyPorts []string
 
 	for i := 1; i < 100; i++ {
 		portName := "COM" + strconv.Itoa(i)
@@ -21,19 +21,18 @@ func findActivePorts() ([]string, []string) {
 		s, err := serial.OpenPort(config)
 		if err != nil {
 			if errors.Is(err, os.ErrPermission) {
-				closedPorts = append(closedPorts, portName)
+				busyPorts = append(busyPorts, portName)
 			}
 			//if err.Error() == "Access is denied." {
-			//	closedPorts = append(closedPorts, portName)
+			//	busyPorts = append(busyPorts, portName)
 			//}
 		} else {
 			openPorts = append(openPorts, portName)
 			_ = s.Close()
 		}
-
 	}
 
-	return openPorts, closedPorts
+	return openPorts, busyPorts
 }
 
 //func checkDeviceOnPorts(ports []string) []*Device {
