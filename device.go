@@ -55,6 +55,24 @@ func (d *Device) connect() {
 }
 
 func (d *Device) listen() {
+	go func(d *Device) {
+		var deviceEvents []deviceEvent
+		for msg := range d.cRec {
+			//fmt.Println(msg.msg)
+
+			incomingEvents, err := collectEvents(msg.msg)
+			if err != nil {
+			}
+			deviceEvents = append(deviceEvents, incomingEvents...)
+			for len(deviceEvents) > 0 {
+				event := deviceEvents[0]
+				deviceEvents = deviceEvents[1:]
+				executeEvents(event, d)
+			}
+
+		}
+	}(d)
+
 	for {
 		buf := make([]byte, 100)
 		n, err := d.serial.Read(buf)
@@ -65,6 +83,12 @@ func (d *Device) listen() {
 			d,
 			string(buf[:n]),
 		}
+	}
+}
+
+func (d *Device) writeTo() {
+	if d.isReceivingData {
+		go writeCom(d.serial, cComSend)
 	}
 }
 

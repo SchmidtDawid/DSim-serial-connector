@@ -144,6 +144,7 @@ func executePresentationEvent(event DevicePresentationEvent) {
 		event.device.isFamiliar = true
 		event.device.isReceivingData = event.isReceivingData
 		event.device.updateConfiguration()
+		event.device.writeTo()
 		return
 	}
 }

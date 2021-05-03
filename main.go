@@ -1,76 +1,52 @@
 package main
 
 import (
+	"fmt"
+	"github.com/micmonay/simconnect"
 	"time"
 )
 
-var eventSC, _ = scConnect("MSFS_events")
-var scGlobal = newScGlobalData()
+var eventSC *simconnect.EasySimConnect
+var globalSc *simconnect.EasySimConnect
+var scGlobal *ScGlobalData
+
+var cComSend = make(chan []string)
 
 func main() {
-
-	go scGlobal.update()
-
-	//testChannel := make(chan string)
-	//cComSend := make(chan []string)
-	//ports, _ := findActivePorts()
-	//myDevices := checkDeviceOnPorts(ports)
+	var testChannel = make(chan string)
 
 	devices := newDevices()
 	devices.getConnectedDevices()
 	devices.connectToDevices()
+
+	connected := false
+	for !connected {
+		go testConnection(testChannel)
+		if <-testChannel != "serial fail" {
+			connected = true
+		}
+	}
+
+	eventSC, _ = scConnect("MSFS_events")
+	globalSc, _ = scConnect("MSFS_plane")
+	scGlobal = newScGlobalData()
+
+	go scGlobal.update()
+
 	devices.listenDevices()
 	devices.startLifecycles()
 	go devices.monitor()
 
-	for _, device := range devices {
-		go func(d *Device) {
-			for msg := range d.cRec {
-				//fmt.Println(msg.msg)
+	varReceiveSC, _ := scConnect("MSFS_vars")
+	varReceiveSC.SetDelay(50 * time.Millisecond)
 
-				incomingEvents, err := collectEvents(msg.msg)
-				if err != nil {
-				}
-				deviceEvents = append(deviceEvents, incomingEvents...)
-				for len(deviceEvents) > 0 {
-					event := deviceEvents[0]
-					deviceEvents = deviceEvents[1:]
-					executeEvents(event, d)
-				}
-
-			}
-		}(device)
-	}
+	cSimVar := registerVars(varReceiveSC)
+	go startGettingVars(cSimVar, cComSend)
 
 	for {
-		time.Sleep(time.Millisecond * 30000)
+		if eventSC.IsAlive() {
+			fmt.Println("event simconnect is alive")
+		}
+		time.Sleep(time.Millisecond * 10000)
 	}
-
-	//connected := false
-	//for !connected {
-	//	go testConnection(testChannel)
-	//	if <-testChannel != "serial fail" {
-	//		connected = true
-	//	}
-	//}
-	//
-	//connectDevices(myDevices, cDevicesReceive, cComSend)
-	//
-	//varReceiveSC, _ := scConnect("MSFS_vars")
-	//varReceiveSC.SetDelay(50 * time.Millisecond)
-
-	//
-	//go keepUpdateConfig(myDevices, globalSc)
-	//
-	//go startSendEvents(eventSC, myDevices, cDevicesReceive)
-	//
-	//cSimVar := registerVars(varReceiveSC)
-	//go startGettingVars(cSimVar, cComSend)
-	//
-	//for {
-	//	if eventSC.IsAlive() {
-	//		fmt.Println("event simconnect is alive")
-	//	}
-	//	time.Sleep(time.Millisecond * 10000)
-	//}
 }

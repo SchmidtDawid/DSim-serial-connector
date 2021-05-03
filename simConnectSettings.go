@@ -12,8 +12,6 @@ type ScGlobalData struct {
 	sc        *simconnect.EasySimConnect
 }
 
-var globalSc, _ = scConnect("MSFS_plane")
-
 func scConnect(appName string) (*simconnect.EasySimConnect, error) {
 	sc, err := simconnect.NewEasySimConnect()
 	if err != nil {
