@@ -35,7 +35,7 @@ func main() {
 
 	devices.listenDevices()
 	devices.startLifecycles()
-	go devices.monitor()
+	//go devices.monitor()
 
 	varReceiveSC, _ := scConnect("MSFS_vars")
 	varReceiveSC.SetDelay(50 * time.Millisecond)

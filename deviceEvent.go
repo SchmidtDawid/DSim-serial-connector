@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/micmonay/simconnect"
+	"github.com/sirupsen/logrus"
 	"strconv"
 	"strings"
 )
@@ -38,6 +39,7 @@ func collectEvents(msg string) ([]deviceEvent, error) {
 	var deviceEvents []deviceEvent
 
 	portChannelMessageBuffer += msg
+
 	newActions = strings.Split(portChannelMessageBuffer, ";")
 	if len(newActions) == 0 || newActions[len(newActions)-1] != "" {
 		return nil, nil
@@ -49,7 +51,9 @@ func collectEvents(msg string) ([]deviceEvent, error) {
 		}
 		de, err := decodeEvent(newAction)
 		if err != nil {
-			return nil, err
+			logrus.Errorf("skiped event")
+			continue
+			//return nil, err
 		} else {
 			deviceEvents = append(deviceEvents, de)
 		}

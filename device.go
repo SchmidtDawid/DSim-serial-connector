@@ -62,6 +62,7 @@ func (d *Device) listen() {
 
 			incomingEvents, err := collectEvents(msg.msg)
 			if err != nil {
+				fmt.Println(err)
 			}
 			deviceEvents = append(deviceEvents, incomingEvents...)
 			for len(deviceEvents) > 0 {
