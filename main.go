@@ -4,7 +4,12 @@ import (
 	"time"
 )
 
+var eventSC, _ = scConnect("MSFS_events")
+var scGlobal = newScGlobalData()
+
 func main() {
+
+	go scGlobal.update()
 
 	//testChannel := make(chan string)
 	//cComSend := make(chan []string)
@@ -37,7 +42,9 @@ func main() {
 		}(device)
 	}
 
-	time.Sleep(time.Millisecond * 30000)
+	for {
+		time.Sleep(time.Millisecond * 30000)
+	}
 
 	//connected := false
 	//for !connected {
@@ -49,13 +56,11 @@ func main() {
 	//
 	//connectDevices(myDevices, cDevicesReceive, cComSend)
 	//
-	//eventSC, _ := scConnect("MSFS_events")
 	//varReceiveSC, _ := scConnect("MSFS_vars")
 	//varReceiveSC.SetDelay(50 * time.Millisecond)
-	//planeSC, _ := scConnect("MSFS_plane")
-	//planeSC.SetDelay(2 * time.Second)
+
 	//
-	//go keepUpdateConfig(myDevices, planeSC)
+	//go keepUpdateConfig(myDevices, globalSc)
 	//
 	//go startSendEvents(eventSC, myDevices, cDevicesReceive)
 	//

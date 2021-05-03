@@ -10,24 +10,28 @@ import (
 type Device struct {
 	id              int
 	port            string
-	connected       bool
 	isFamiliar      bool
 	configFile      string
 	isReceivingData bool
 	serial          *serial.Port
+	connection      DeviceConnection
 	configuration   Config
 	cRec            chan DeviceMsg
 	cSnd            chan DeviceMsg
-	connectionTime  time.Time
-	lastSeen        time.Time
+}
+
+type DeviceConnection struct {
+	connected          bool
+	begin              time.Time
+	pokeInterval       time.Duration
+	connectionFailures int
+	lastSeen           time.Time
 }
 
 type DeviceMsg struct {
 	device *Device
 	msg    string
 }
-
-var cDevicesReceive = make(chan DeviceMsg)
 
 func newEmptyDevice(port string) *Device {
 	return &Device{
@@ -37,52 +41,17 @@ func newEmptyDevice(port string) *Device {
 	}
 }
 
-//func newDevice(deviceID string, port string) (Device, error) {
-//  fmt.Println(deviceID)
-//  deviceID = strings.Split(deviceID, ";")[0]
-//  params := strings.Split(deviceID, ",")
-//  if len(params) != 5 {
-//    return Device{},
-//      errors.New("wrong event format")
-//  }
-//
-//  var intParams []int
-//  for _, param := range params {
-//    intParam, err := strconv.Atoi(param)
-//    if err != nil {
-//      return Device{}, err
-//    }
-//    intParams = append(intParams, intParam)
-//  }
-//
-//  receive := false
-//  if intParams[2] != 0 {
-//    receive = true
-//  }
-//
-//  configFile := "config_" + strconv.Itoa(intParams[1])
-//  configuration := readConfigurationFromFile(configFile, "default")
-//
-//  return Device{
-//    intParams[1],
-//    port,
-//    true,
-//    configFile,
-//    receive,
-//    configuration,
-//  }, nil
-//}
-
 func (d *Device) connect() {
 	config := &serial.Config{Name: d.port, Baud: 57600}
 	s, err := serial.OpenPort(config)
 	if err != nil {
-		d.connected = false
-	} else {
-		d.serial = s
-		d.connected = true
-		d.connectionTime = time.Now()
+		d.connection.connected = false
+		return
 	}
+	d.serial = s
+	d.connection.connected = true
+	d.connection.pokeInterval = time.Second * 5
+	d.connection.begin = time.Now()
 }
 
 func (d *Device) listen() {
@@ -99,37 +68,29 @@ func (d *Device) listen() {
 	}
 }
 
-func (d *Device) poke() {
-	if !d.connected && time.Now().Before(d.connectionTime.Add(time.Second*4)) {
+func (d *Device) sanitize() {
+	if !d.connection.connected && time.Now().Before(d.connection.begin.Add(time.Second*4)) {
 		return
 	}
+	if !d.connection.lastSeen.Add(d.connection.pokeInterval * 3).Before(time.Now()) {
+		fmt.Println(d.id, " device lost")
+	}
 	d.serial.Write([]byte("?;"))
-	//go d.serial.Write([]byte("?;"))
-	//time.Sleep(time.Millisecond * 20)
-	//buf := make([]byte, 128)
-	//n, err := d.serial.Read(buf)
-	//if err != nil {
-	//  log.Fatal(err)
-	//} else {
-	//  fmt.Println(string(buf[:n]))
-	//  if string(buf[0]) == "3" {
-	//    //d, err := newDevice(string(buf[:n]), port)
-	//    if err != nil {
-	//      fmt.Println(err)
-	//    }
-	//    //myDevices = append(myDevices, &d)
-	//  }
-	//}
 }
 
-func (d Device) sanitizeCheck(presentation devicePresentationEvent) {
+func (d Device) sanitizeCheck(presentation DevicePresentationEvent) {
 	if d.id == presentation.deviceID {
 		fmt.Println("sanitaze OK!")
+	} else {
+		//TODO reset device
 	}
 }
 
-func (d *Device) updateConfiguration(planeName string) {
-	c := readConfigurationFromFile(d, planeName)
+func (d *Device) updateConfiguration() {
+	if !d.isFamiliar {
+		return
+	}
+	c := readConfigurationFromFile(d)
 	d.configuration = c
 }
 
@@ -139,21 +100,17 @@ func (d *Device) getConfiguration() Config {
 
 func (d *Device) lifecycle() {
 
-	pokeTimer := time.NewTicker(time.Second * 1)
+	pokeTimer := time.NewTicker(d.connection.pokeInterval)
+	configTimer := time.NewTicker(time.Second * 2)
 
 	for {
 		select {
 		case _ = <-pokeTimer.C:
-			d.poke()
+			d.sanitize()
+		case _ = <-configTimer.C:
+			d.updateConfiguration()
 		}
 	}
-	//for {
-	//  time.Sleep(time.Millisecond * 2000)
-	//  d.poke()
-	//  time.Sleep(time.Millisecond * 2000)
-	//  d.poke()
-	//  d.somethingElse()
-	//}
 }
 
 func printConfig(device *Device) {

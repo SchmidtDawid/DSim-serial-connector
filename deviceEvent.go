@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"github.com/micmonay/simconnect"
 	"strconv"
 	"strings"
 )
@@ -15,14 +16,14 @@ type deviceEvent struct {
 	value3    int
 }
 
-type deviceActionEvent struct {
+type DeviceActionEvent struct {
 	device          *Device
 	componentType   int
 	componentNumber int
 	action          int
 }
 
-type devicePresentationEvent struct {
+type DevicePresentationEvent struct {
 	device          *Device
 	deviceID        int
 	isReceivingData bool
@@ -85,7 +86,7 @@ func decodeEvent(event string) (deviceEvent, error) {
 func executeEvents(event deviceEvent, device *Device) {
 	if event.eventType == 1 {
 		executeActionEvent(
-			deviceActionEvent{
+			DeviceActionEvent{
 				device,
 				event.value1,
 				event.value2,
@@ -95,7 +96,7 @@ func executeEvents(event deviceEvent, device *Device) {
 	}
 	if event.eventType == 3 {
 		executePresentationEvent(
-			devicePresentationEvent{
+			DevicePresentationEvent{
 				device,
 				event.deviceID,
 				event.value1 != 0,
@@ -106,15 +107,15 @@ func executeEvents(event deviceEvent, device *Device) {
 	}
 }
 
-func executeActionEvent(event deviceActionEvent) {
+func executeActionEvent(event DeviceActionEvent) {
 	fmt.Println(event)
 	if event.componentType == 1 {
 		if len(event.device.configuration.Elements.Buttons) >= event.componentNumber &&
 			len(event.device.configuration.Elements.Buttons[event.componentNumber-1]) >= event.action {
 			ev := event.device.configuration.Elements.Buttons[event.componentNumber-1][event.action-1]
 			fmt.Println("Button", event.componentNumber, event.action, ev.SimEvent)
-			//event := sc.NewSimEvent(simconnect.KeySimEvent(ev.SimEvent))
-			//event.RunWithValue(ev.Value)
+			event := eventSC.NewSimEvent(simconnect.KeySimEvent(ev.SimEvent))
+			event.RunWithValue(ev.Value)
 		}
 	}
 	if event.componentType == 2 {
@@ -122,8 +123,8 @@ func executeActionEvent(event deviceActionEvent) {
 			len(event.device.configuration.Elements.Switches[event.componentNumber-1]) >= event.action {
 			ev := event.device.configuration.Elements.Switches[event.componentNumber-1][event.action-1]
 			fmt.Println("Switches", event.componentNumber, event.action, ev.SimEvent)
-			//event := sc.NewSimEvent(simconnect.KeySimEvent(ev.SimEvent))
-			//event.RunWithValue(ev.Value)
+			event := eventSC.NewSimEvent(simconnect.KeySimEvent(ev.SimEvent))
+			event.RunWithValue(ev.Value)
 		}
 	}
 	if event.componentType == 3 {
@@ -131,19 +132,19 @@ func executeActionEvent(event deviceActionEvent) {
 			len(event.device.configuration.Elements.Encoders[event.componentNumber-1]) >= event.action {
 			ev := event.device.configuration.Elements.Encoders[event.componentNumber-1][event.action-1]
 			fmt.Println("Encoder", event.componentNumber, event.action, ev.SimEvent)
-			//event := sc.NewSimEvent(simconnect.KeySimEvent(ev.SimEvent))
-			//event.RunWithValue(ev.Value)
+			event := eventSC.NewSimEvent(simconnect.KeySimEvent(ev.SimEvent))
+			event.RunWithValue(ev.Value)
 		}
 	}
 }
 
-func executePresentationEvent(event devicePresentationEvent) {
+func executePresentationEvent(event DevicePresentationEvent) {
 	event.device.sanitizeCheck(event)
 	if event.device.id == 0 {
 		event.device.id = event.deviceID
 		event.device.isFamiliar = true
 		event.device.isReceivingData = event.isReceivingData
-		event.device.updateConfiguration("")
+		event.device.updateConfiguration()
 		return
 	}
 

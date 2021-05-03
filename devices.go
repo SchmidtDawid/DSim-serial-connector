@@ -29,7 +29,7 @@ func (d *Devices) connectToDevices() {
 
 func (d *Devices) askDevices() {
 	for _, device := range *d {
-		device.poke()
+		device.sanitize()
 	}
 }
 
