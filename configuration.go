@@ -6,6 +6,7 @@ import (
 	"github.com/micmonay/simconnect"
 	"io/ioutil"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -26,9 +27,11 @@ type Action struct {
 	Value    int    `json:"value"`
 }
 
-func readConfigurationFromFile(file string, planeName string) Config {
+func readConfigurationFromFile(device *Device, planeName string) Config {
 
-	optionalFileName := file + "_" + strings.ToLower(strings.ReplaceAll(planeName, " ", "_"))
+	fileBase := "config_" + strconv.Itoa(device.id)
+
+	optionalFileName := fileBase + "_" + strings.ToLower(strings.ReplaceAll(planeName, " ", "_"))
 	//fmt.Println(planeName)
 
 	var jsonFile *os.File
@@ -36,7 +39,7 @@ func readConfigurationFromFile(file string, planeName string) Config {
 
 	jsonFile, err = os.Open(optionalFileName + ".json")
 	if err != nil {
-		jsonFile, err = os.Open(file + "_default" + ".json")
+		jsonFile, err = os.Open(fileBase + "_default" + ".json")
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -53,15 +56,10 @@ func readConfigurationFromFile(file string, planeName string) Config {
 	var config Config
 	err = json.Unmarshal(byteValue, &config)
 	if err != nil {
-		fmt.Println(file, err)
+		fmt.Println(fileBase, err)
 	}
 
 	return config
-}
-
-func (d *Device) updateConfiguration(planeName string) {
-	c := readConfigurationFromFile(d.configFile, planeName)
-	d.configuration = c
 }
 
 func keepUpdateConfig(devices []*Device, sc *simconnect.EasySimConnect) {

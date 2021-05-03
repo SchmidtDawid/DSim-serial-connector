@@ -1,5 +1,10 @@
 package main
 
+import (
+	"fmt"
+	"time"
+)
+
 type Devices []*Device
 
 func newDevices() Devices {
@@ -14,7 +19,6 @@ func (d *Devices) getConnectedDevices() {
 	for _, port := range allPorts {
 		*d = append(*d, newEmptyDevice(port))
 	}
-
 }
 
 func (d *Devices) connectToDevices() {
@@ -25,12 +29,31 @@ func (d *Devices) connectToDevices() {
 
 func (d *Devices) askDevices() {
 	for _, device := range *d {
-		device.ask()
+		device.poke()
 	}
 }
 
 func (d *Devices) listenDevices() {
 	for _, device := range *d {
 		go device.listen()
+		time.Sleep(time.Millisecond * 100)
+	}
+}
+
+func (d *Devices) startLifecycles() {
+	for _, device := range *d {
+		go device.lifecycle()
+		time.Sleep(time.Millisecond * 100)
+	}
+}
+
+func (d *Devices) monitor() {
+	for {
+		time.Sleep(time.Second)
+		for _, device := range *d {
+			fmt.Printf("ID: %v, FAMILIAR: %v\n", device.id, device.isFamiliar)
+			//fmt.Printf("%+v\n", device)
+		}
+		fmt.Println("----------")
 	}
 }

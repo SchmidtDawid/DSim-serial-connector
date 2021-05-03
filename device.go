@@ -16,6 +16,9 @@ type Device struct {
 	isReceivingData bool
 	serial          *serial.Port
 	configuration   Config
+	cRec            chan DeviceMsg
+	cSnd            chan DeviceMsg
+	connectionTime  time.Time
 	lastSeen        time.Time
 }
 
@@ -29,13 +32,15 @@ var cDevicesReceive = make(chan DeviceMsg)
 func newEmptyDevice(port string) *Device {
 	return &Device{
 		port: port,
+		cRec: make(chan DeviceMsg),
+		cSnd: make(chan DeviceMsg),
 	}
 }
 
-//func newDevice(device string, port string) (Device, error) {
-//  fmt.Println(device)
-//  device = strings.Split(device, ";")[0]
-//  params := strings.Split(device, ",")
+//func newDevice(deviceID string, port string) (Device, error) {
+//  fmt.Println(deviceID)
+//  deviceID = strings.Split(deviceID, ";")[0]
+//  params := strings.Split(deviceID, ",")
 //  if len(params) != 5 {
 //    return Device{},
 //      errors.New("wrong event format")
@@ -76,6 +81,7 @@ func (d *Device) connect() {
 	} else {
 		d.serial = s
 		d.connected = true
+		d.connectionTime = time.Now()
 	}
 }
 
@@ -86,15 +92,15 @@ func (d *Device) listen() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		cDevicesReceive <- DeviceMsg{
+		d.cRec <- DeviceMsg{
 			d,
 			string(buf[:n]),
 		}
 	}
 }
 
-func (d *Device) ask() {
-	if !d.connected {
+func (d *Device) poke() {
+	if !d.connected && time.Now().Before(d.connectionTime.Add(time.Second*4)) {
 		return
 	}
 	d.serial.Write([]byte("?;"))
@@ -116,8 +122,38 @@ func (d *Device) ask() {
 	//}
 }
 
-func (d Device) getConfiguration(device Device) Config {
+func (d Device) sanitizeCheck(presentation devicePresentationEvent) {
+	if d.id == presentation.deviceID {
+		fmt.Println("sanitaze OK!")
+	}
+}
+
+func (d *Device) updateConfiguration(planeName string) {
+	c := readConfigurationFromFile(d, planeName)
+	d.configuration = c
+}
+
+func (d *Device) getConfiguration() Config {
 	return d.configuration
+}
+
+func (d *Device) lifecycle() {
+
+	pokeTimer := time.NewTicker(time.Second * 1)
+
+	for {
+		select {
+		case _ = <-pokeTimer.C:
+			d.poke()
+		}
+	}
+	//for {
+	//  time.Sleep(time.Millisecond * 2000)
+	//  d.poke()
+	//  time.Sleep(time.Millisecond * 2000)
+	//  d.poke()
+	//  d.somethingElse()
+	//}
 }
 
 func printConfig(device *Device) {

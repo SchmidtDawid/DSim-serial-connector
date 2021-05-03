@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"time"
 )
 
@@ -16,25 +15,28 @@ func main() {
 	devices.getConnectedDevices()
 	devices.connectToDevices()
 	devices.listenDevices()
+	devices.startLifecycles()
+	go devices.monitor()
+
 	for _, device := range devices {
-		fmt.Println(*device)
+		go func(d *Device) {
+			for msg := range d.cRec {
+				//fmt.Println(msg.msg)
+
+				incomingEvents, err := collectEvents(msg.msg)
+				if err != nil {
+				}
+				deviceEvents = append(deviceEvents, incomingEvents...)
+				for len(deviceEvents) > 0 {
+					event := deviceEvents[0]
+					deviceEvents = deviceEvents[1:]
+					executeEvents(event, d)
+				}
+
+			}
+		}(device)
 	}
 
-	for msg := range cDevicesReceive {
-		fmt.Println(msg.device.port)
-		//incomingEvents, err := collectEvents(msg.msg)
-		//if err != nil {
-		//}
-		//deviceEvents = append(deviceEvents, incomingEvents...)
-		//for len(deviceEvents) > 0 {
-		//	event := deviceEvents[0]
-		//	deviceEvents = deviceEvents[1:]
-		//	fmt.Println(event)
-		//	executeEvents(sc, event, myDevices)
-		//}
-	}
-
-	time.Now()
 	time.Sleep(time.Millisecond * 30000)
 
 	//connected := false
