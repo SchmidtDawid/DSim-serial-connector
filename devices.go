@@ -51,7 +51,7 @@ func (d *Devices) monitor() {
 	for {
 		time.Sleep(time.Second)
 		for _, device := range *d {
-			fmt.Printf("ID: %v, FAMILIAR: %v\n", device.id, device.isFamiliar)
+			fmt.Printf("ID: %v, familiar: %v isReceiving:  %v\n", device.id, device.isFamiliar, device.isReceivingData)
 			//fmt.Printf("%+v\n", device)
 		}
 		fmt.Println("----------")

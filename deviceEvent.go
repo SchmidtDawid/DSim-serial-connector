@@ -108,7 +108,6 @@ func executeEvents(event deviceEvent, device *Device) {
 }
 
 func executeActionEvent(event DeviceActionEvent) {
-	fmt.Println(event)
 	if event.componentType == 1 {
 		if len(event.device.configuration.Elements.Buttons) >= event.componentNumber &&
 			len(event.device.configuration.Elements.Buttons[event.componentNumber-1]) >= event.action {
@@ -147,21 +146,4 @@ func executePresentationEvent(event DevicePresentationEvent) {
 		event.device.updateConfiguration()
 		return
 	}
-
 }
-
-var deviceEvents []deviceEvent
-
-//func startSendEvents(sc *simconnect.EasySimConnect, myDevices []*Device, c chan string) {
-//	for msg := range c {
-//		incomingEvents, err := collectEvents(msg)
-//		if err != nil {
-//		}
-//		deviceEvents = append(deviceEvents, incomingEvents...)
-//		for len(deviceEvents) > 0 {
-//			event := deviceEvents[0]
-//			deviceEvents = deviceEvents[1:]
-//			executeEvents(sc, event, myDevices)
-//		}
-//	}
-//}

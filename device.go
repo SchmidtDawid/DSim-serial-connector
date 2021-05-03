@@ -80,7 +80,7 @@ func (d *Device) sanitize() {
 
 func (d Device) sanitizeCheck(presentation DevicePresentationEvent) {
 	if d.id == presentation.deviceID {
-		fmt.Println("sanitaze OK!")
+		//fmt.Println("sanitaze OK!")
 	} else {
 		//TODO reset device
 	}

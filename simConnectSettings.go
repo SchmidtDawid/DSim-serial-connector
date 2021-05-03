@@ -60,7 +60,6 @@ func (d *ScGlobalData) update() {
 		result = <-cSimVar
 		for _, simVar := range result {
 			if strings.Contains(string(simVar.Unit), "String") {
-				fmt.Println(simVar.GetString())
 				d.planeName = simVar.GetString()
 			}
 		}

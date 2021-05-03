@@ -28,7 +28,7 @@ type Action struct {
 func readConfigurationFromFile(device *Device) Config {
 
 	fileBase := "config_" + strconv.Itoa(device.id)
-	fmt.Println("PLANE", scGlobal.planeName)
+	//fmt.Println("PLANE", scGlobal.planeName)
 	optionalFileName := fileBase + "_" + strings.ToLower(strings.ReplaceAll(scGlobal.planeName, " ", "_"))
 
 	var jsonFile *os.File
