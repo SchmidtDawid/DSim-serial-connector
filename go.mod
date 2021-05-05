@@ -1,4 +1,4 @@
-module serial_reader
+module DSim_connect
 
 go 1.15
 
