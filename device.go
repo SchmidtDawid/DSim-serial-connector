@@ -1,9 +1,9 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"github.com/tarm/serial"
-	"log"
 	"time"
 )
 
@@ -13,6 +13,7 @@ type Device struct {
 	isFamiliar      bool
 	configFile      string
 	isReceivingData bool
+	hasLifecycle    bool
 	serial          *serial.Port
 	connection      DeviceConnection
 	configuration   Config
@@ -26,6 +27,8 @@ type DeviceConnection struct {
 	pokeInterval       time.Duration
 	connectionFailures int
 	lastSeen           time.Time
+	ctx                context.Context
+	cancel             context.CancelFunc
 }
 
 type DeviceMsg struct {
@@ -42,6 +45,9 @@ func newEmptyDevice(port string) *Device {
 }
 
 func (d *Device) connect() {
+	if d.connection.connectionFailures > 5 {
+		return
+	}
 	config := &serial.Config{Name: d.port, Baud: 57600}
 	s, err := serial.OpenPort(config)
 	if err != nil {
@@ -52,37 +58,66 @@ func (d *Device) connect() {
 	d.connection.connected = true
 	d.connection.pokeInterval = time.Second * 5
 	d.connection.begin = time.Now()
+	d.connection.ctx, d.connection.cancel = context.WithCancel(context.Background())
+	go d.listen()
+	go d.lifecycle()
+	go func() {
+		time.Sleep(time.Second * 3)
+		d.serial.Write([]byte("?;"))
+	}()
+}
+
+func (d *Device) disconnect() {
+	d.connection.cancel()
+	d.serial.Close()
+	d.connection.connected = false
 }
 
 func (d *Device) listen() {
+	if !d.connection.connected {
+		return
+	}
 	go func(d *Device) {
+		if !d.connection.connected {
+			return
+		}
 		var deviceEvents []deviceEvent
 		for msg := range d.cRec {
-			//fmt.Println(msg.msg)
+			select {
+			case <-d.connection.ctx.Done():
+				return
+			default:
+				//fmt.Println(d.id)
 
-			incomingEvents, err := collectEvents(msg.msg)
-			if err != nil {
-				fmt.Println(err)
+				incomingEvents, err := collectEvents(msg.msg)
+				if err != nil {
+					fmt.Println(err)
+				}
+				deviceEvents = append(deviceEvents, incomingEvents...)
+				for len(deviceEvents) > 0 {
+					event := deviceEvents[0]
+					deviceEvents = deviceEvents[1:]
+					executeEvents(event, d)
+				}
 			}
-			deviceEvents = append(deviceEvents, incomingEvents...)
-			for len(deviceEvents) > 0 {
-				event := deviceEvents[0]
-				deviceEvents = deviceEvents[1:]
-				executeEvents(event, d)
-			}
-
 		}
 	}(d)
 
 	for {
-		buf := make([]byte, 100)
-		n, err := d.serial.Read(buf)
-		if err != nil {
-			log.Fatal(err)
-		}
-		d.cRec <- DeviceMsg{
-			d,
-			string(buf[:n]),
+		select {
+		case <-d.connection.ctx.Done():
+			return
+		default:
+			buf := make([]byte, 100)
+			n, err := d.serial.Read(buf)
+			if err != nil {
+				fmt.Println(err)
+				d.disconnect()
+			}
+			d.cRec <- DeviceMsg{
+				d,
+				string(buf[:n]),
+			}
 		}
 	}
 }
@@ -94,13 +129,17 @@ func (d *Device) writeTo() {
 }
 
 func (d *Device) sanitize() {
-	if !d.connection.connected && time.Now().Before(d.connection.begin.Add(time.Second*4)) {
+	if !d.connection.connected || time.Now().Before(d.connection.begin.Add(time.Second*3)) {
 		return
 	}
-	if !d.connection.lastSeen.Add(d.connection.pokeInterval * 3).Before(time.Now()) {
-		fmt.Println(d.id, " device lost")
-	}
 	d.serial.Write([]byte("?;"))
+	if time.Now().After(d.connection.lastSeen.Add(time.Second * 10)) {
+		fmt.Println("error? ", d.id)
+		d.connection.connectionFailures++
+		if d.connection.connectionFailures > 5 {
+			d.disconnect()
+		}
+	}
 }
 
 func (d Device) sanitizeCheck(presentation DevicePresentationEvent) {
@@ -124,6 +163,9 @@ func (d *Device) getConfiguration() Config {
 }
 
 func (d *Device) lifecycle() {
+	if d.hasLifecycle {
+		return
+	}
 
 	pokeTimer := time.NewTicker(d.connection.pokeInterval)
 	configTimer := time.NewTicker(time.Second * 2)

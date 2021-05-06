@@ -37,9 +37,9 @@ func scConnect(appName string) (*simconnect.EasySimConnect, error) {
 }
 
 func newScGlobalData() *ScGlobalData {
-	globalSc.SetDelay(2 * time.Second)
 	return &ScGlobalData{
-		sc: globalSc,
+		sc:        globalSc,
+		planeName: "",
 	}
 }
 

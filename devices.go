@@ -48,12 +48,39 @@ func (d *Devices) startLifecycles() {
 }
 
 func (d *Devices) monitor() {
-	for {
-		time.Sleep(time.Second)
-		for _, device := range *d {
-			fmt.Printf("ID: %v, familiar: %v isReceiving:  %v\n", device.id, device.isFamiliar, device.isReceivingData)
-			//fmt.Printf("%+v\n", device)
+	go func(d *Devices) {
+		for {
+			time.Sleep(time.Second)
+			for _, device := range *d {
+
+				if device.connection.connected == false {
+					device.connect()
+				}
+
+				fmt.Printf("port : %v, ID: %v, familiar: %v, isReceiving:  %v, connected: %v\n",
+					device.port, device.id, device.isFamiliar, device.isReceivingData, device.connection.connected)
+			}
+			fmt.Println("----------")
+
 		}
-		fmt.Println("----------")
-	}
+	}(d)
+
+	go func(d *Devices) {
+		checkNewTimer := time.NewTicker(time.Second * 3)
+
+		for {
+			select {
+			case _ = <-checkNewTimer.C:
+				openedPorts, _ := findActivePorts()
+				for _, port := range openedPorts {
+					for _, device := range *d {
+						if device.port == port {
+							return
+						}
+					}
+					*d = append(*d, newEmptyDevice(port))
+				}
+			}
+		}
+	}(d)
 }

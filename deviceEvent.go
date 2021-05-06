@@ -7,6 +7,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type deviceEvent struct {
@@ -88,6 +89,7 @@ func decodeEvent(event string) (deviceEvent, error) {
 }
 
 func executeEvents(event deviceEvent, device *Device) {
+	device.connection.lastSeen = time.Now()
 	if event.eventType == 1 {
 		executeActionEvent(
 			DeviceActionEvent{
