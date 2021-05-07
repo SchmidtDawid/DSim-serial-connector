@@ -1,0 +1,571 @@
+{
+  "config": {
+    "buttons": [
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM_STBY_RADIO_SWAP",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM2_RADIO_SWAP",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM_STBY_RADIO_SWAP",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM2_RADIO_SWAP",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM_STBY_RADIO_SWAP",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NAV1_RADIO_SWAP",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM_STBY_RADIO_SWAP",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NAV1_RADIO_SWAP",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NAV1_RADIO_SWAP",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NAV2_RADIO_SWAP",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NAV1_RADIO_SWAP",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NAV2_RADIO_SWAP",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "BUTTON 13",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "BUTTON 14",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "BUTTON 15",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "BUTTON 16",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM1_TRANSMIT_SELECT",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM_RECEIVE_ALL_TOGGLE",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM2_TRANSMIT_SELECT",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM_RECEIVE_ALL_TOGGLE",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "BUTTON 21",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "BUTTON 22",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    ],
+    "switches": [],
+    "encoders": [
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM_RADIO_WHOLE_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "COM_RADIO_WHOLE_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM_RADIO_FRACT_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "COM_RADIO_FRACT_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM2_RADIO_WHOLE_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "COM2_RADIO_WHOLE_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM2_RADIO_FRACT_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "COM2_RADIO_FRACT_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM_RADIO_WHOLE_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "COM_RADIO_WHOLE_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM_RADIO_FRACT_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "COM_RADIO_FRACT_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NAV1_RADIO_WHOLE_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "NAV1_RADIO_WHOLE_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NAV1_RADIO_FRACT_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "NAV1_RADIO_FRACT_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NAV1_RADIO_WHOLE_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "NAV1_RADIO_WHOLE_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NAV1_RADIO_FRACT_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "NAV1_RADIO_FRACT_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NAV2_RADIO_WHOLE_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "NAV2_RADIO_WHOLE_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NAV2_RADIO_FRACT_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "NAV2_RADIO_FRACT_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "ENCODER 13",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "ENCODER 13",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "ENCODER 14",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "ENCODER 14",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "ENCODER 15",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "ENCODER 15",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "ENCODER 16",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "ENCODER 16",
+              "value": null
+            }
+          ]
+        }
+      ]
+    ]
+  }
+}

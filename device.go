@@ -133,7 +133,7 @@ func (d *Device) sanitize() {
 		return
 	}
 	d.serial.Write([]byte("?;"))
-	if time.Now().After(d.connection.lastSeen.Add(time.Second * 10)) {
+	if time.Now().After(d.connection.lastSeen.Add(time.Second * 11)) {
 		fmt.Println("error? ", d.id)
 		d.connection.connectionFailures++
 		if d.connection.connectionFailures > 5 {

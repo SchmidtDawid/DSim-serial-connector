@@ -1,0 +1,303 @@
+{
+  "config": {
+    "buttons": [],
+    "switches": [
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MAGNETO1_OFF",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MAGNETO1_SET",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MAGNETO1_SET",
+              "value": 2
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MAGNETO1_BOTH",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MAGNETO1_START",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "TOGGLE_MASTER_ALTERNATOR",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "TOGGLE_MASTER_ALTERNATOR",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "TOGGLE_MASTER_BATTERY",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "TOGGLE_MASTER_BATTERY",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "AVIONICS_MASTER_SET",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "AVIONICS_MASTER_SET",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "AVIONICS_MASTER_SET",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "AVIONICS_MASTER_SET",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "AVIONICS_MASTER_SET",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "AVIONICS_MASTER_SET",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "AVIONICS_MASTER_SET",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "AVIONICS_MASTER_SET",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "PANEL_LIGHTS_ON",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "PANEL_LIGHTS_ON",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "TOGGLE_BEACON_LIGHTS",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "TOGGLE_BEACON_LIGHTS",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "LANDING_LIGHTS_TOGGLE",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "LANDING_LIGHTS_TOGGLE",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "TOGGLE_TAXI_LIGHTS",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "TOGGLE_TAXI_LIGHTS",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "TOGGLE_NAV_LIGHTS",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "TOGGLE_NAV_LIGHTS",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "STROBES_TOGGLE",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "STROBES_TOGGLE",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    ],
+    "encoders": []
+  }
+}

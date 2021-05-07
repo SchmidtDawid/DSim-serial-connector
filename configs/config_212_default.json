@@ -1,0 +1,221 @@
+{
+  "config": {
+    "buttons": [],
+    "switches": [
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "FUEL_SELECTOR_LEFT",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "FUEL_SELECTOR_CENTER",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "FUEL_SELECTOR_RIGHT",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "GEAR_UP",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "GEAR_DOWN",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "PITOT_HEAT_ON",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "PITOT_HEAT_OFF",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "TOGGLE_PROPELLER_DEICE",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "TOGGLE_PROPELLER_DEICE",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NONE",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NONE",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "TOGGLE_STRUCTURAL_DEICE",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "TOGGLE_STRUCTURAL_DEICE",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NONE",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NONE",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NONE",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NONE",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NONE",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "NONE",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "TOGGLE_ELECT_FUEL_PUMP",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "TOGGLE_ELECT_FUEL_PUMP",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    ],
+    "encoders": []
+  }
+}

@@ -20,14 +20,18 @@ type Elements struct {
 }
 
 type Action struct {
-	Action   int    `json:"action"`
-	SimEvent string `json:"simEvent"`
-	Value    int    `json:"value"`
+	Action   int        `json:"action"`
+	SimEvent []SimEvent `json:"simEvent"`
+}
+
+type SimEvent struct {
+	Event string `json:"event"`
+	Value int    `json:"value"`
 }
 
 func readConfigurationFromFile(device *Device) Config {
 
-	fileBase := "config_" + strconv.Itoa(device.id)
+	fileBase := "configs/config_" + strconv.Itoa(device.id)
 	//fmt.Println("PLANE", scGlobal.planeName)
 	optionalFileName := fileBase + "_" + strings.ToLower(strings.ReplaceAll(scGlobal.planeName, " ", "_"))
 
@@ -58,29 +62,3 @@ func readConfigurationFromFile(device *Device) Config {
 
 	return config
 }
-
-//func keepUpdateConfig(devices []*Device, sc *simconnect.EasySimConnect) {
-//	cSimVar, err := sc.ConnectToSimVar(
-//		simconnect.SimVarTitle(),
-//	)
-//	if err != nil {
-//		fmt.Println("Can not register Vars")
-//	}
-//
-//	var result []simconnect.SimVar
-//	var planeName string
-//
-//	for range time.Tick(time.Second * 2) {
-//
-//		result = <-cSimVar
-//		for _, simVar := range result {
-//			if strings.Contains(string(simVar.Unit), "String") {
-//				planeName = simVar.GetString()
-//			}
-//		}
-//
-//		for _, device := range devices {
-//			device.updateConfiguration(planeName)
-//		}
-//	}
-//}

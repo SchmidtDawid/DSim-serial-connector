@@ -1,0 +1,571 @@
+{
+  "config": {
+    "buttons": [
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM_STBY_RADIO_SWAP",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_MFD_FMS_Upper_PUSH",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM_STBY_RADIO_SWAP",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_MFD_ENT_Push",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_COM_Push",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_NAV_Push",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_COM_Switch",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_NAV_Switch",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_COM_Push",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_NAV_Push",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_COM_Switch",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_NAV_Switch",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "BUTTON 13",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "BUTTON 14",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "BUTTON 15",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "BUTTON 16",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM1_TRANSMIT_SELECT",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM_RECEIVE_ALL_TOGGLE",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM2_TRANSMIT_SELECT",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "COM_RECEIVE_ALL_TOGGLE",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "BUTTON 21",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "BUTTON 22",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    ],
+    "switches": [],
+    "encoders": [
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_MFD_RANGE_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_MFD_RANGE_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_MFD_BARO_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_MFD_BARO_dec",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_MFD_FMS_Lower_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_MFD_FMS_Lower_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_MFD_FMS_Upper_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_MFD_FMS_Upper_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_COM_Large_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_COM_Large_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_COM_Small_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_COM_Small_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_NAV_Large_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_NAV_Large_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_NAV_Small_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_NAV_Small_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_COM_Large_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_COM_Large_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_COM_Small_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_COM_Small_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_NAV_Large_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_NAV_Large_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_NAV_Small_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_PFD_NAV_Small_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "ENCODERRRR 13",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "ENCODERRRR 13",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "ENCODERRRR 14",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "ENCODERRRR 14",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "ENCODERRRR 15",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "ENCODERRRR 15",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "ENCODERRRR 16",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "ENCODERRRR 16",
+              "value": null
+            }
+          ]
+        }
+      ]
+    ]
+  }
+}

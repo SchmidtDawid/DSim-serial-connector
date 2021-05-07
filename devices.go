@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"time"
 )
 
@@ -57,10 +56,10 @@ func (d *Devices) monitor() {
 					device.connect()
 				}
 
-				fmt.Printf("port : %v, ID: %v, familiar: %v, isReceiving:  %v, connected: %v\n",
-					device.port, device.id, device.isFamiliar, device.isReceivingData, device.connection.connected)
+				//fmt.Printf("port : %v, ID: %v, familiar: %v, isReceiving:  %v, connected: %v\n",
+				//	device.port, device.id, device.isFamiliar, device.isReceivingData, device.connection.connected)
 			}
-			fmt.Println("----------")
+			//fmt.Println("----------")
 
 		}
 	}(d)

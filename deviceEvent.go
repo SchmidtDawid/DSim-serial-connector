@@ -114,31 +114,41 @@ func executeEvents(event deviceEvent, device *Device) {
 }
 
 func executeActionEvent(event DeviceActionEvent) {
+	if eventSC == nil || eventSC.IsAlive() {
+		return
+	}
+
 	if event.componentType == 1 {
 		if len(event.device.configuration.Elements.Buttons) >= event.componentNumber &&
 			len(event.device.configuration.Elements.Buttons[event.componentNumber-1]) >= event.action {
 			ev := event.device.configuration.Elements.Buttons[event.componentNumber-1][event.action-1]
-			fmt.Println("Button", event.componentNumber, event.action, ev.SimEvent)
-			event := eventSC.NewSimEvent(simconnect.KeySimEvent(ev.SimEvent))
-			event.RunWithValue(ev.Value)
+			for _, singleEvent := range ev.SimEvent {
+				fmt.Println("Button", event.componentNumber, event.action, singleEvent.Event)
+				event := eventSC.NewSimEvent(simconnect.KeySimEvent(singleEvent.Event))
+				event.RunWithValue(singleEvent.Value)
+			}
 		}
 	}
 	if event.componentType == 2 {
 		if len(event.device.configuration.Elements.Switches) >= event.componentNumber &&
 			len(event.device.configuration.Elements.Switches[event.componentNumber-1]) >= event.action {
 			ev := event.device.configuration.Elements.Switches[event.componentNumber-1][event.action-1]
-			fmt.Println("Switches", event.componentNumber, event.action, ev.SimEvent)
-			event := eventSC.NewSimEvent(simconnect.KeySimEvent(ev.SimEvent))
-			event.RunWithValue(ev.Value)
+			for _, singleEvent := range ev.SimEvent {
+				fmt.Println("Switches", event.componentNumber, event.action, singleEvent.Event)
+				event := eventSC.NewSimEvent(simconnect.KeySimEvent(singleEvent.Event))
+				event.RunWithValue(singleEvent.Value)
+			}
 		}
 	}
 	if event.componentType == 3 {
 		if len(event.device.configuration.Elements.Encoders) >= event.componentNumber &&
 			len(event.device.configuration.Elements.Encoders[event.componentNumber-1]) >= event.action {
 			ev := event.device.configuration.Elements.Encoders[event.componentNumber-1][event.action-1]
-			fmt.Println("Encoder", event.componentNumber, event.action, ev.SimEvent)
-			event := eventSC.NewSimEvent(simconnect.KeySimEvent(ev.SimEvent))
-			event.RunWithValue(ev.Value)
+			for _, singleEvent := range ev.SimEvent {
+				fmt.Println("Encoder", event.componentNumber, event.action, singleEvent.Event)
+				event := eventSC.NewSimEvent(simconnect.KeySimEvent(singleEvent.Event))
+				event.RunWithValue(singleEvent.Value)
+			}
 		}
 	}
 }
