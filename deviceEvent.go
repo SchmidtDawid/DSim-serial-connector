@@ -114,7 +114,7 @@ func executeEvents(event deviceEvent, device *Device) {
 }
 
 func executeActionEvent(event DeviceActionEvent) {
-	if eventSC == nil || eventSC.IsAlive() {
+	if eventSC == nil || !eventSC.IsAlive() {
 		return
 	}
 

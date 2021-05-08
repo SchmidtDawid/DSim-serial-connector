@@ -11,28 +11,20 @@ import (
 func registerVars(sc *simconnect.EasySimConnect) <-chan []simconnect.SimVar {
 	cSimVar, err := sc.ConnectToSimVar(
 		simconnect.SimVar{
-			Index:    1,
-			Name:     "COM ACTIVE FREQUENCY:1",
-			Unit:     "MHz",
-			Settable: false,
+			Name: "COM ACTIVE FREQUENCY:1",
+			Unit: "MHz",
 		},
 		simconnect.SimVar{
-			Index:    1,
-			Name:     "COM STANDBY FREQUENCY:1",
-			Unit:     "MHz",
-			Settable: false,
+			Name: "COM STANDBY FREQUENCY:1",
+			Unit: "MHz",
 		},
 		simconnect.SimVar{
-			Index:    2,
-			Name:     "COM ACTIVE FREQUENCY:2",
-			Unit:     "MHz",
-			Settable: false,
+			Name: "COM ACTIVE FREQUENCY:2",
+			Unit: "MHz",
 		},
 		simconnect.SimVar{
-			Index:    2,
-			Name:     "COM STANDBY FREQUENCY:2",
-			Unit:     "MHz",
-			Settable: false,
+			Name: "COM STANDBY FREQUENCY:2",
+			Unit: "MHz",
 		},
 		simconnect.SimVarNavActiveFrequency(1),
 		simconnect.SimVarNavStandbyFrequency(1),
