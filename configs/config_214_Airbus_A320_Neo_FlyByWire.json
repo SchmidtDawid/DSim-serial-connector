@@ -6,7 +6,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "AP_APR_HOLD",
+              "event": "A32NX.FCU_APPR_PUSH",
               "value": 0
             }
           ]
@@ -17,7 +17,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "SPEED_SLOT_INDEX_SET",
+              "event": "A32NX.FCU_SPD_PUSH",
               "value": 1
             }
           ]
@@ -28,7 +28,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "AP_BC_HOLD",
+              "event": "A32NX.FCU_HDG_PUSH",
               "value": 0
             }
           ]
@@ -39,7 +39,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "HEADING_SLOT_INDEX_SET",
+              "event": "A32NX.FCU_HDG_PULL",
               "value": 1
             }
           ]
@@ -61,7 +61,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "VS_SLOT_INDEX_SET",
+              "event": "A32NX.FCU_VS_PUSH",
               "value": -1
             }
           ]
@@ -83,7 +83,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "YAW_DAMPER_TOGGLE",
+              "event": "A32NX.FCU_EXPED_PUSH",
               "value": 0
             }
           ]
@@ -116,7 +116,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "VS_SLOT_INDEX_SET",
+              "event": "A32NX.FCU_VS_PULL",
               "value": 2
             }
           ]
@@ -127,7 +127,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "AP_ALT_HOLD",
+              "event": "A32NX.FCU_ALT_PULL",
               "value": 0
             }
           ]
@@ -138,7 +138,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "HEADING_SLOT_INDEX_SET",
+              "event": "A32NX.FCU_SPD_PULL",
               "value": 2
             }
           ]
@@ -149,7 +149,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "ALTITUDE_SLOT_INDEX_SET",
+              "event": "A32NX.FCU_ALT_PULL",
               "value": 2
             }
           ]
