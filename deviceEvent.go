@@ -154,7 +154,6 @@ func executeActionEvent(event DeviceActionEvent) {
 }
 
 func executePresentationEvent(event DevicePresentationEvent) {
-	event.device.sanitizeCheck(event)
 	if event.device.id == 0 {
 		event.device.id = event.deviceID
 		event.device.isFamiliar = true
@@ -163,4 +162,5 @@ func executePresentationEvent(event DevicePresentationEvent) {
 		event.device.writeTo()
 		return
 	}
+	event.device.sanitizeCheck(event)
 }

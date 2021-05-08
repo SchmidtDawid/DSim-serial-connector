@@ -3,7 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/micmonay/simconnect"
 	"github.com/tarm/serial"
+	"strconv"
 	"time"
 )
 
@@ -18,7 +20,8 @@ type Device struct {
 	connection      DeviceConnection
 	configuration   Config
 	cRec            chan DeviceMsg
-	cSnd            chan DeviceMsg
+	cSnd            chan []string
+	simData         simData
 }
 
 type DeviceConnection struct {
@@ -31,6 +34,12 @@ type DeviceConnection struct {
 	cancel             context.CancelFunc
 }
 
+type simData struct {
+	data    []VarRequest
+	sc      *simconnect.EasySimConnect
+	cSimVar <-chan []simconnect.SimVar
+}
+
 type DeviceMsg struct {
 	device *Device
 	msg    string
@@ -40,7 +49,7 @@ func newEmptyDevice(port string) *Device {
 	return &Device{
 		port: port,
 		cRec: make(chan DeviceMsg),
-		cSnd: make(chan DeviceMsg),
+		cSnd: make(chan []string),
 	}
 }
 
@@ -124,7 +133,14 @@ func (d *Device) listen() {
 
 func (d *Device) writeTo() {
 	if d.isReceivingData {
-		go writeCom(d.serial, cComSend)
+		d.simData.sc, _ = scConnect(strconv.Itoa(d.id) + "_Vars")
+		d.simData.sc.SetDelay(50 * time.Millisecond)
+
+		d.simData.cSimVar = registerVars(d.simData.sc)
+		go startGettingVars(d.simData.cSimVar, d.cSnd)
+
+		go writeCom(d.serial, d.cSnd)
+
 	}
 }
 

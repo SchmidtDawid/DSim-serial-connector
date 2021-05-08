@@ -10,7 +10,8 @@ import (
 )
 
 type Config struct {
-	Elements Elements `json:"config"`
+	Elements Elements     `json:"config"`
+	Vars     []VarRequest `json:"vars"`
 }
 
 type Elements struct {
@@ -27,6 +28,13 @@ type Action struct {
 type SimEvent struct {
 	Event string `json:"event"`
 	Value int    `json:"value"`
+}
+
+type VarRequest struct {
+	Name     string `json:"name"`
+	Unit     string `json:"unit"`
+	Settable bool   `json:"settable"`
+	Value    string
 }
 
 func readConfigurationFromFile(device *Device) Config {

@@ -9,8 +9,6 @@ var eventSC *simconnect.EasySimConnect
 var globalSc *simconnect.EasySimConnect
 var scGlobal *ScGlobalData
 
-var cComSend = make(chan []string)
-
 func main() {
 	var testChannel = make(chan string)
 
@@ -33,12 +31,6 @@ func main() {
 	go scGlobal.update()
 
 	devices.monitor()
-
-	varReceiveSC, _ := scConnect("MSFS_vars")
-	varReceiveSC.SetDelay(50 * time.Millisecond)
-
-	cSimVar := registerVars(varReceiveSC)
-	go startGettingVars(cSimVar, cComSend)
 
 	for {
 		//if eventSC.IsAlive() {

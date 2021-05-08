@@ -23,14 +23,14 @@ func scConnect(appName string) (*simconnect.EasySimConnect, error) {
 	var connected bool = false
 	fmt.Println("connecting to", appName+"...")
 	for !connected {
-		c, err := sc.Connect("Com_listener")
+		c, err := sc.Connect(appName)
 		if err != nil {
 			time.Sleep(time.Second * 2)
 			continue
 		} else {
 			connected = true
 		}
-		<-c // Wait serial confirmation
+		<-c
 	}
 
 	return sc, nil

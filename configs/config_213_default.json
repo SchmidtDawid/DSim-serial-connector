@@ -567,5 +567,47 @@
         }
       ]
     ]
-  }
+  },
+  "vars": [
+    {
+      "name": "COM ACTIVE FREQUENCY:1",
+      "unit": "MHz",
+      "Settable": false
+    },
+    {
+      "name": "COM STANDBY FREQUENCY:1",
+      "unit": "MHz",
+      "Settable": false
+    },
+    {
+      "name": "COM ACTIVE FREQUENCY:2",
+      "unit": "MHz",
+      "Settable": false
+    },
+    {
+      "name": "COM STANDBY FREQUENCY:2",
+      "unit": "MHz",
+      "Settable": false
+    },
+    {
+      "name": "NAV ACTIVE FREQUENCY:1",
+      "unit": "MHz",
+      "Settable": false
+    },
+    {
+      "name": "NAV STANDBY FREQUENCY:1",
+      "unit": "MHz",
+      "Settable": false
+    },
+    {
+      "name": "NAV ACTIVE FREQUENCY:2",
+      "unit": "MHz",
+      "Settable": false
+    },
+    {
+      "name": "NAV STANDBY FREQUENCY:2",
+      "unit": "MHz",
+      "Settable": false
+    }
+  ]
 }
