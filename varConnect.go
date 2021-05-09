@@ -8,37 +8,10 @@ import (
 	"time"
 )
 
-func registerVars(sc *simconnect.EasySimConnect) <-chan []simconnect.SimVar {
-	cSimVar, err := sc.ConnectToSimVar(
-		simconnect.SimVar{
-			Name: "COM ACTIVE FREQUENCY:1",
-			Unit: "MHz",
-		},
-		simconnect.SimVar{
-			Name: "COM STANDBY FREQUENCY:1",
-			Unit: "MHz",
-		},
-		simconnect.SimVar{
-			Name: "COM ACTIVE FREQUENCY:2",
-			Unit: "MHz",
-		},
-		simconnect.SimVar{
-			Name: "COM STANDBY FREQUENCY:2",
-			Unit: "MHz",
-		},
-		simconnect.SimVarNavActiveFrequency(1),
-		simconnect.SimVarNavStandbyFrequency(1),
-		simconnect.SimVarNavActiveFrequency(2),
-		simconnect.SimVarNavStandbyFrequency(2),
-		//simconnect.SimVar{
-		//	Index:    0,
-		//	Name:     "AUTOPILOT MASTER",
-		//	Unit:     "Bool",
-		//	Settable: true,
-		//},
-	)
+func registerVars(sc *simconnect.EasySimConnect, vars []simconnect.SimVar) <-chan []simconnect.SimVar {
+	cSimVar, err := sc.ConnectToSimVar(vars...)
 	if err != nil {
-		fmt.Println("Can not register Vars")
+		fmt.Println("Can not register Vars", err)
 	}
 
 	return cSimVar

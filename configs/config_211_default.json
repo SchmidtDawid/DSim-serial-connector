@@ -7,7 +7,7 @@
           "simEvent": [
             {
               "event": "MAGNETO1_OFF",
-              "value": 0
+              "value": 3
             }
           ]
         }

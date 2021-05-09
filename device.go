@@ -136,12 +136,24 @@ func (d *Device) writeTo() {
 		d.simData.sc, _ = scConnect(strconv.Itoa(d.id) + "_Vars")
 		d.simData.sc.SetDelay(50 * time.Millisecond)
 
-		d.simData.cSimVar = registerVars(d.simData.sc)
+		d.simData.cSimVar = registerVars(d.simData.sc, d.getSimVars())
 		go startGettingVars(d.simData.cSimVar, d.cSnd)
 
 		go writeCom(d.serial, d.cSnd)
 
 	}
+}
+
+func (d *Device) getSimVars() []simconnect.SimVar {
+	var Vars []simconnect.SimVar
+	for _, vReq := range d.configuration.Vars {
+		Vars = append(Vars, simconnect.SimVar{
+			Name:     vReq.Name,
+			Unit:     simconnect.SimVarUnit(vReq.Unit),
+			Settable: vReq.Settable,
+		})
+	}
+	return Vars
 }
 
 func (d *Device) sanitize() {
