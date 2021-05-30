@@ -62,7 +62,7 @@
           "simEvent": [
             {
               "event": "TOGGLE_MASTER_ALTERNATOR",
-              "value": 0
+Kr              "value": 0
             }
           ]
         },

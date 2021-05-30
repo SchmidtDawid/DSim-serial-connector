@@ -1,13 +1,12 @@
 {
   "config": {
-    "buttons": [],
-    "switches": [
+    "buttons": [
       [
         {
           "action": 1,
           "simEvent": [
             {
-              "event": "FUEL_SELECTOR_LEFT",
+              "event": "AP_APR_HOLD",
               "value": 0
             }
           ]
@@ -18,7 +17,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "FUEL_SELECTOR_ALL",
+              "event": "AP_NAV1_HOLD",
               "value": 0
             }
           ]
@@ -29,7 +28,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "FUEL_SELECTOR_RIGHT",
+              "event": "AP_BC_HOLD",
               "value": 0
             }
           ]
@@ -40,16 +39,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "GEAR_UP",
-              "value": 0
-            }
-          ]
-        },
-        {
-          "action": 1,
-          "simEvent": [
-            {
-              "event": "GEAR_DOWN",
+              "event": "AP_HDG_HOLD",
               "value": 0
             }
           ]
@@ -60,16 +50,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "PITOT_HEAT_ON",
-              "value": 0
-            }
-          ]
-        },
-        {
-          "action": 1,
-          "simEvent": [
-            {
-              "event": "PITOT_HEAT_OFF",
+              "event": "AP_MASTER",
               "value": 0
             }
           ]
@@ -80,16 +61,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "TOGGLE_PROPELLER_DEICE",
-              "value": 0
-            }
-          ]
-        },
-        {
-          "action": 1,
-          "simEvent": [
-            {
-              "event": "TOGGLE_PROPELLER_DEICE",
+              "event": "BTN",
               "value": 0
             }
           ]
@@ -100,16 +72,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "NONE",
-              "value": 0
-            }
-          ]
-        },
-        {
-          "action": 1,
-          "simEvent": [
-            {
-              "event": "NONE",
+              "event": "TOGGLE_FLIGHT_DIRECTOR",
               "value": 0
             }
           ]
@@ -120,16 +83,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "TOGGLE_STRUCTURAL_DEICE",
-              "value": 0
-            }
-          ]
-        },
-        {
-          "action": 1,
-          "simEvent": [
-            {
-              "event": "TOGGLE_STRUCTURAL_DEICE",
+              "event": "YAW_DAMPER_TOGGLE",
               "value": 0
             }
           ]
@@ -140,16 +94,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "NONE",
-              "value": 0
-            }
-          ]
-        },
-        {
-          "action": 1,
-          "simEvent": [
-            {
-              "event": "NONE",
+              "event": "BTN",
               "value": 0
             }
           ]
@@ -160,16 +105,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "NONE",
-              "value": 0
-            }
-          ]
-        },
-        {
-          "action": 1,
-          "simEvent": [
-            {
-              "event": "NONE",
+              "event": "BTN",
               "value": 0
             }
           ]
@@ -180,16 +116,7 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "NONE",
-              "value": 0
-            }
-          ]
-        },
-        {
-          "action": 1,
-          "simEvent": [
-            {
-              "event": "NONE",
+              "event": "AP_VS_HOLD",
               "value": 0
             }
           ]
@@ -200,22 +127,137 @@
           "action": 1,
           "simEvent": [
             {
-              "event": "TOGGLE_ELECT_FUEL_PUMP",
+              "event": "AP_ALT_HOLD",
               "value": 0
             }
           ]
-        },
+        }
+      ],
+      [
         {
           "action": 1,
           "simEvent": [
             {
-              "event": "TOGGLE_ELECT_FUEL_PUMP",
+              "event": "BTN",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "BTN",
               "value": 0
             }
           ]
         }
       ]
     ],
-    "encoders": []
+    "switches": [],
+    "encoders": [
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "HEADING_BUG_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "HEADING_BUG_DEC",
+              "value": null
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_MFD_BARO_INC",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "MobiFlight.AS1000_MFD_BARO_DEC",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "AP_ALT_VAR_INC",
+              "value": 1000
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "AP_ALT_VAR_DEC",
+              "value": 1000
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "AP_ALT_VAR_INC",
+              "value": 100
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "AP_ALT_VAR_DEC",
+              "value": 100
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "action": 1,
+          "simEvent": [
+            {
+              "event": "AP_VS_VAR_INC",
+              "value": null
+            }
+          ]
+        },
+        {
+          "action": 2,
+          "simEvent": [
+            {
+              "event": "AP_VS_VAR_DEC",
+              "value": null
+            }
+          ]
+        }
+      ]
+    ]
   }
 }
