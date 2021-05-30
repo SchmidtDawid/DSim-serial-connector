@@ -4,8 +4,10 @@ import (
 	"context"
 	"fmt"
 	"github.com/micmonay/simconnect"
+	"github.com/sirupsen/logrus"
 	"github.com/tarm/serial"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -22,6 +24,8 @@ type Device struct {
 	cRec            chan DeviceMsg
 	cSnd            chan []string
 	simData         simData
+	eventsBuffer    []deviceEvent
+	msgBuffer       string
 }
 
 type DeviceConnection struct {
@@ -65,10 +69,11 @@ func (d *Device) connect() {
 	}
 	d.serial = s
 	d.connection.connected = true
-	d.connection.pokeInterval = time.Second * 5
+	d.connection.pokeInterval = time.Second * 30
 	d.connection.begin = time.Now()
 	d.connection.ctx, d.connection.cancel = context.WithCancel(context.Background())
 	go d.listen()
+	go d.processReceivedData()
 	go d.lifecycle()
 	go func() {
 		time.Sleep(time.Second * 3)
@@ -80,38 +85,14 @@ func (d *Device) disconnect() {
 	d.connection.cancel()
 	d.serial.Close()
 	d.connection.connected = false
+	d.simData.sc.Close()
+	logrus.Errorf(strconv.Itoa(d.id), " disconnected")
 }
 
 func (d *Device) listen() {
 	if !d.connection.connected {
 		return
 	}
-	go func(d *Device) {
-		if !d.connection.connected {
-			return
-		}
-		var deviceEvents []deviceEvent
-		for msg := range d.cRec {
-			select {
-			case <-d.connection.ctx.Done():
-				return
-			default:
-				//fmt.Println(d.id)
-
-				incomingEvents, err := collectEvents(msg.msg)
-				if err != nil {
-					fmt.Println(err)
-				}
-				deviceEvents = append(deviceEvents, incomingEvents...)
-				for len(deviceEvents) > 0 {
-					event := deviceEvents[0]
-					deviceEvents = deviceEvents[1:]
-					executeEvents(event, d)
-				}
-			}
-		}
-	}(d)
-
 	for {
 		select {
 		case <-d.connection.ctx.Done():
@@ -131,7 +112,57 @@ func (d *Device) listen() {
 	}
 }
 
+func (d *Device) processReceivedData() {
+	if !d.connection.connected {
+		return
+	}
+	for msg := range d.cRec {
+		select {
+		case <-d.connection.ctx.Done():
+			return
+		default:
+			//fmt.Println(d.id)
+			d.collectEvents(msg.msg)
+
+			for len(d.eventsBuffer) > 0 {
+				event := d.eventsBuffer[0]
+				d.eventsBuffer = d.eventsBuffer[1:]
+				executeEvents(event, d)
+			}
+		}
+	}
+}
+
+func (d *Device) collectEvents(msg string) {
+	var newActions []string
+	var deviceEvents []deviceEvent
+
+	d.msgBuffer += msg
+
+	newActions = strings.Split(d.msgBuffer, ";")
+	if len(newActions) == 0 || newActions[len(newActions)-1] != "" {
+		return
+	}
+
+	for _, newAction := range newActions {
+		if newAction == "" {
+			continue
+		}
+		de, err := decodeEvent(newAction)
+		fmt.Println(newAction)
+		if err != nil {
+			logrus.Errorf("skiped event")
+			continue
+		} else {
+			deviceEvents = append(deviceEvents, de)
+		}
+	}
+	d.msgBuffer = ""
+	d.eventsBuffer = append(d.eventsBuffer, deviceEvents...)
+}
+
 func (d *Device) writeTo() {
+	time.Sleep(time.Millisecond * 100)
 	if d.isReceivingData {
 		d.simData.sc, _ = scConnect(strconv.Itoa(d.id) + "_Vars")
 		d.simData.sc.SetDelay(50 * time.Millisecond)
@@ -140,7 +171,6 @@ func (d *Device) writeTo() {
 		go startGettingVars(d.simData.cSimVar, d.cSnd)
 
 		go writeCom(d.serial, d.cSnd)
-
 	}
 }
 
@@ -157,14 +187,15 @@ func (d *Device) getSimVars() []simconnect.SimVar {
 }
 
 func (d *Device) sanitize() {
-	if !d.connection.connected || time.Now().Before(d.connection.begin.Add(time.Second*3)) {
+	if !d.connection.connected || time.Now().Before(d.connection.begin.Add(time.Second*5)) {
 		return
 	}
+	//fmt.Println("poke -> ", d.id)
 	d.serial.Write([]byte("?;"))
-	if time.Now().After(d.connection.lastSeen.Add(time.Second * 11)) {
+	if time.Now().After(d.connection.lastSeen.Add(d.connection.pokeInterval * 3)) {
 		fmt.Println("error? ", d.id)
 		d.connection.connectionFailures++
-		if d.connection.connectionFailures > 5 {
+		if d.connection.connectionFailures > 5 && d.id == 0 {
 			d.disconnect()
 		}
 	}
@@ -196,7 +227,7 @@ func (d *Device) lifecycle() {
 	}
 
 	pokeTimer := time.NewTicker(d.connection.pokeInterval)
-	configTimer := time.NewTicker(time.Second * 2)
+	configTimer := time.NewTicker(time.Second * 5)
 
 	for {
 		select {
@@ -206,8 +237,4 @@ func (d *Device) lifecycle() {
 			d.updateConfiguration()
 		}
 	}
-}
-
-func printConfig(device *Device) {
-	fmt.Println(device.configuration)
 }

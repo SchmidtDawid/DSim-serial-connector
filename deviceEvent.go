@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/micmonay/simconnect"
-	"github.com/sirupsen/logrus"
 	"strconv"
 	"strings"
 	"time"
@@ -31,36 +30,6 @@ type DevicePresentationEvent struct {
 	isReceivingData bool
 	data            int
 	data2           int
-}
-
-var portChannelMessageBuffer string
-
-func collectEvents(msg string) ([]deviceEvent, error) {
-	var newActions []string
-	var deviceEvents []deviceEvent
-
-	portChannelMessageBuffer += msg
-
-	newActions = strings.Split(portChannelMessageBuffer, ";")
-	if len(newActions) == 0 || newActions[len(newActions)-1] != "" {
-		return nil, nil
-	}
-
-	for _, newAction := range newActions {
-		if newAction == "" {
-			continue
-		}
-		de, err := decodeEvent(newAction)
-		if err != nil {
-			logrus.Errorf("skiped event")
-			continue
-			//return nil, err
-		} else {
-			deviceEvents = append(deviceEvents, de)
-		}
-	}
-	portChannelMessageBuffer = ""
-	return deviceEvents, nil
 }
 
 func decodeEvent(event string) (deviceEvent, error) {
@@ -159,7 +128,7 @@ func executePresentationEvent(event DevicePresentationEvent) {
 		event.device.isFamiliar = true
 		event.device.isReceivingData = event.isReceivingData
 		event.device.updateConfiguration()
-		event.device.writeTo()
+		go event.device.writeTo()
 		return
 	}
 	event.device.sanitizeCheck(event)
